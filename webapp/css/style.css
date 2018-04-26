@@ -2,11 +2,15 @@
 	padding: 1rem 2rem 0rem 2rem !important;
 }
 
-@media (min-width: 1024px){
-	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
-		margin: 1rem 1rem !important;
-	}
+/* ---- UTIS SUEK THEME ---- */
+.sapUiTheme-utistheme1 div[id*="master"] .sapMLIB.sapMLIBSelected{
+	background: rgba(100,100,100,.2);
 }
+
+.sapUiTheme-utistheme1 .sapUiSizeCompact .sapMPageWithFooter>section{
+	background: rgba(255,255,255,.2);
+}
+
 @media(min-width: 80rem){
 	.sapUiTheme-utistheme1 .sapUShellApplicationContainer{
 		width: 80rem !important;

@@ -1,3 +1,16 @@
 .sapMOH{
 	padding: 1rem 2rem 0rem 2rem !important;
 }
+
+@media (min-width: 1024px){
+	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
+		margin: 1rem 1rem !important;
+	}
+}
+@media(min-width: 80rem){
+	.sapUiTheme-utistheme1 .sapUShellApplicationContainer{
+		width: 80rem !important;
+		margin-right: auto;
+		margin-left: auto;
+	}
+}

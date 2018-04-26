@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "managerisks.ManageRisks",
+        "description": "Manage Deals Risks ",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#ManageRisks-Display",
+        "navigationComponentName": "managerisks",
+        "intentSemanticObject": "ManageRisks",
+        "intentAction": "Display",
+        "html5ApplicationName": "managerisks",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "c9c38f1c-a728-47dd-8993-2079ac63a2ee-1517314421366"
+        ],
+        "contentPackages": [
+            "oth"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Manage RIsks",
+        "subtitle": "Manage Deals RIsks",
+        "searchKeywords": "Manage RIsks,Manage Deals RIsks",
+        "displayIconUrl": "sap-icon://activate",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

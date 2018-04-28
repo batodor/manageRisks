@@ -1,6 +1,10 @@
 .sapMOH{
 	padding: 1rem 2rem 0rem 2rem !important;
 }
+div[id*="ratingElement"] .sapMCbBg{
+	left:0;
+	top:0;
+}
 
 /* ---- UTIS SUEK THEME ---- */
 .sapUiTheme-utistheme1 div[id*="master"] .sapMLIB.sapMLIBSelected{

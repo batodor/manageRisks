@@ -107,6 +107,8 @@ sap.ui.define([
 						Code :  sObjectId
 					});
 					this._bindView("/" + sObjectPath);
+					
+					this.byId('ratingElement').bindElement("/CounterpartyListSet('" + sObjectId +"')/ToRatingGeneral");
 				}.bind(this));
 			},
 

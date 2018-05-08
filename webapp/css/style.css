@@ -5,6 +5,9 @@ div[id*="ratingElement"] .sapMCbBg{
 	left:0;
 	top:0;
 }
+.sapUiSizeCompact .sapMTB{
+	height: 3rem;
+}
 
 /* ---- UTIS SUEK THEME ---- */
 .sapUiTheme-utistheme1 div[id*="master"] .sapMLIB.sapMLIBSelected{

@@ -73,13 +73,29 @@ sap.ui.define([
 			 * @param {object} oEvent an event containing the total number of items in the list
 			 * @private
 			 */
-			onListUpdateFinished : function (oEvent) {
+			onRisksUpdateFinished : function (oEvent) {
 				var sTitle,
 					iTotalItems = oEvent.getParameter("total"),
 					oViewModel = this.getModel("detailView");
 
 				// only update the counter if the length is final
-				if (this.byId("lineItemsList").getBinding("items").isLengthFinal()) {
+				if (this.byId("risksTable").getBinding("items").isLengthFinal()) {
+					if (iTotalItems) {
+						sTitle = this.getResourceBundle().getText("detailLineItemTableHeadingCount", [iTotalItems]);
+					} else {
+						//Display 'Line Items' instead of 'Line items (0)'
+						sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
+					}
+					oViewModel.setProperty("/lineItemListTitle", sTitle);
+				}
+			},
+			onLimitsUpdateFinished : function (oEvent) {
+				var sTitle,
+					iTotalItems = oEvent.getParameter("total"),
+					oViewModel = this.getModel("detailView");
+
+				// only update the counter if the length is final
+				if (this.byId("limitsTable").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
 						sTitle = this.getResourceBundle().getText("detailLineItemTableHeadingCount", [iTotalItems]);
 					} else {
@@ -174,7 +190,7 @@ sap.ui.define([
 				// Store original busy indicator delay for the detail view
 				var iOriginalViewBusyDelay = this.getView().getBusyIndicatorDelay(),
 					oViewModel = this.getModel("detailView"),
-					oLineItemTable = this.byId("lineItemsList"),
+					oLineItemTable = this.byId("risksTable"),
 					iOriginalLineItemTableBusyDelay = oLineItemTable.getBusyIndicatorDelay();
 
 				// Make sure busy indicator is displayed immediately when

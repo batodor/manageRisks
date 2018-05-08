@@ -24,12 +24,14 @@
 				<l:BlockLayoutCell>
 					<OverflowToolbar width="100%">
 						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
+						<ToolbarSpacer/>
+						<Button press="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 					</OverflowToolbar>
 					<Table
-						id="lineItemsList"
+						id="risksTable"
 						width="auto"
 						items="{ToComplianceRisks}"
-						updateFinished="onListUpdateFinished"
+						updateFinished="onRisksUpdateFinished"
 						noDataText="{i18n>detailLineItemTableNoDataText}"
 						busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<columns>
@@ -82,6 +84,44 @@
 					<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>
 				</l:BlockLayoutCell>
 			</l:VerticalLayout>
+			<l:VerticalLayout width="100%" >
+				<l:BlockLayoutCell>
+					<OverflowToolbar width="100%">
+						<Title text="{i18n>limitsByCurrentRating}" titleStyle="H3"/>
+					</OverflowToolbar>
+					<Table
+						id="limitsTable"
+						width="auto"
+						updateFinished="onLimitsUpdateFinished"
+						noDataText="{i18n>detailLineItemTableNoDataText}"
+						busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<columns>
+							<Column><Text class="black" text="{i18n>tonnage}"/></Column>
+							<Column><Text class="black" text="{i18n>period}"/></Column>
+							<Column><Text class="black" text="{i18n>paymentTerm}"/></Column>
+							<Column><Text class="black" text="{i18n>variant}"/></Column>
+							<Column><Text class="black" text="{i18n>durationInDays}"/></Column>
+							<Column><Text class="black" text="{i18n>tonnage}"/></Column>
+							<Column><Text class="black" text="{i18n>info}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{Counterparty}"/>
+									<Text custom:key="{RiskType}" text="{Type}"/>
+									<Text text="{Description}"/>
+									<Text text="{Actions}"/>
+									<Text custom:key="{DateFrom}"
+										text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+									<Text custom:key="{DateTo}"
+										text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								</cells>
+							</ColumnListItem>	
+						</items>
+					</Table>
+					<ToolbarSpacer/>
+				</l:BlockLayoutCell>
+		</l:VerticalLayout>
 		</semantic:content>
 
 		<semantic:sendEmailAction>

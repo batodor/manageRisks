@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:VerticalLayout id="ratingElement" width="100%" >
+		<l:BlockLayoutCell>
+			<Label class="black" text="{i18n>counterparty}:" width="240px"/>
+			<Label text="{Counterparty}"/>
+			<ToolbarSpacer/>
+			<Label class="black" text="{i18n>rating}:" width="240px"/>
+			<Label text="{RatingSet}"/>
+			<ToolbarSpacer/>
+			<Label class="black" text="{i18n>updateDate}:" width="240px"/>
+			<Label custom:key="{Date}" text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+			<ToolbarSpacer/>
+			<Label class="black" text="{i18n>expressScore}:" width="240px"/>
+			<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>
+		</l:BlockLayoutCell>
+	</l:VerticalLayout>
+	<l:VerticalLayout width="100%" >
+		<l:BlockLayoutCell>
+			<OverflowToolbar width="100%">
+				<Title text="{i18n>limitsByCurrentRating}" titleStyle="H3"/>
+			</OverflowToolbar>
+			<Table
+				id="limitsTable"
+				width="auto"
+				updateFinished="onLimitsUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+				<columns>
+					<Column><Text class="black" text="{i18n>tonnage}"/></Column>
+					<Column><Text class="black" text="{i18n>period}"/></Column>
+					<Column><Text class="black" text="{i18n>paymentTerm}"/></Column>
+					<Column><Text class="black" text="{i18n>variant}"/></Column>
+					<Column><Text class="black" text="{i18n>durationInDays}"/></Column>
+					<Column><Text class="black" text="{i18n>tonnage}"/></Column>
+					<Column><Text class="black" text="{i18n>info}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Counterparty}"/>
+							<Text custom:key="{RiskType}" text="{Type}"/>
+							<Text text="{Description}"/>
+							<Text text="{Actions}"/>
+							<Text custom:key="{DateFrom}"
+								text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+							<Text custom:key="{DateTo}"
+								text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+						</cells>
+					</ColumnListItem>	
+				</items>
+			</Table>
+			<ToolbarSpacer/>
+			<CheckBox enabled="false" id="withMembers" /> 
+			<Label text="{i18n>withMembers}" labelFor="withMembers"/>
+		</l:BlockLayoutCell>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

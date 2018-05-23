@@ -17,9 +17,6 @@ div[id*="ratingElement"] .sapMCbBg{
 .sapUiTheme-utistheme1 .sapUiSizeCompact .sapMPageWithFooter>section{
 	background: rgba(255,255,255,.2);
 }
-.sapUiTheme-utistheme1 .sapUiBlockCellContent .sapMLabel{
-	color: #fff;
-}
 
 @media(min-width: 80rem){
 	.sapUiTheme-utistheme1 .sapUShellApplicationContainer{

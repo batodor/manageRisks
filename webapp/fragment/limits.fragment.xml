@@ -50,8 +50,8 @@
 				</items>
 			</Table>
 			<ToolbarSpacer/>
-			<CheckBox enabled="false" id="withMembers" /> 
-			<Label text="{i18n>withMembers}" labelFor="withMembers"/>
+			<CheckBox id="withMembers" text="{i18n>withMembers}" />
+			
 		</l:BlockLayoutCell>
 	</l:VerticalLayout>
 </core:FragmentDefinition>

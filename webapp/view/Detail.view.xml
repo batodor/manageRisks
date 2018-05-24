@@ -32,26 +32,24 @@
 				</items>
 			</IconTabBar>
 		</semantic:content>
-
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction
-				id="shareEmail"
-				press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction
-				id="shareInJam"
-				visible="{FLP>/isShareInJamActive}"
-				press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-
+		
+		<semantic:mainAction>
+			<semantic:MainAction
+				press="openDeal"
+				text="{i18n>openDeal}" />
+		</semantic:mainAction>
 		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton
-				id="shareTile"
-				title="{detailView>/saveAsTileTitle}"/>
+			<Button
+				press="save"
+				type="Accept"
+				text="{i18n>save}" />
 		</semantic:saveAsTileAction>
-
+		<semantic:positiveAction>
+			<semantic:PositiveAction
+				press="approve"
+				text="{i18n>approve}" />
+		</semantic:positiveAction>
+		
 	</semantic:DetailPage>
 
 </mvc:View>

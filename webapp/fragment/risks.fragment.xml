@@ -4,7 +4,6 @@
 			<OverflowToolbar width="100%">
 				<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
 				<ToolbarSpacer/>
-				<Button press="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 			</OverflowToolbar>
 			<Table
 				id="risksTable"
@@ -37,6 +36,33 @@
 								text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 							<CheckBox selected="{Actual}" editable="false"/>
 							<CheckBox selected="{CommentOfLawyer}" editable="false"/>
+						</cells>
+					</ColumnListItem>	
+				</items>
+			</Table>
+		</l:BlockLayoutCell>
+	</l:VerticalLayout>
+	<l:VerticalLayout width="100%" >
+		<l:BlockLayoutCell>
+			<OverflowToolbar width="400px">
+				<Title text="{i18n>risksByCountry}" titleStyle="H3"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+			<Table
+				id="risksCountryTable"
+				width="400px"
+				updateFinished="onRisksUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+				<columns>
+					<Column hAlign="Center"><Text class="black" text="{i18n>country}"/></Column>
+					<Column hAlign="Center"><Text class="black" text="{i18n>sanctions}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Counterparty}"/>
+							<CheckBox enabled="false" selected="{Canctions}"/>
 						</cells>
 					</ColumnListItem>	
 				</items>

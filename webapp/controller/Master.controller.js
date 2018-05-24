@@ -63,7 +63,7 @@ sap.ui.define([
 			getCount: function(){
 				var that = this;
 				$.ajax({
-				    url: that.getModel().sServiceUrl + "/CounterpartyListSet/$count",
+				    url: that.getModel().sServiceUrl + "/DealSet/$count",
 				    type: 'GET',
 				    success: function(count){ 
 				        that.byId("page").setTitle(that.getResourceBundle().getText("masterTitleCount", [count]));
@@ -243,7 +243,8 @@ sap.ui.define([
 			_showDetail : function (oItem) {
 				var bReplace = !Device.system.phone;
 				this.getRouter().navTo("object", {
-					objectId : oItem.getBindingContext().getProperty("Code")
+					TCNumber : oItem.getBindingContext().getProperty("TCNumber"),
+					ItemType: oItem.getBindingContext().getProperty("ItemType")
 				}, bReplace);
 			},
 

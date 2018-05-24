@@ -117,14 +117,25 @@ sap.ui.define([
 			 * @private
 			 */
 			_onObjectMatched : function (oEvent) {
-				var sObjectId =  oEvent.getParameter("arguments").objectId;
+				var risks = this.byId('risksFragment');
+				var limits = this.byId('limitsFragment');
+				risks.setVisible(false);
+				limits.setVisible(false);
+				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
+				var ItemType = oEvent.getParameter("arguments").ItemType;
 				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("CounterpartyListSet", {
-						Code :  sObjectId
+					if(ItemType === "R"){
+						risks.setVisible(true);
+					}else if(ItemType === "L"){
+						limits.setVisible(true);
+					}
+					var sObjectPath = this.getModel().createKey("DealSet", {
+						TCNumber : TCNumber,
+						ItemType : ItemType
 					});
 					this._bindView("/" + sObjectPath);
 					
-					this.byId('ratingElement').bindElement("/CounterpartyListSet('" + sObjectId +"')/ToRatingGeneral");
+					// this.byId('ratingElement').bindElement("/RisksByCounterpartySet('" + TCNumber +"')");
 				}.bind(this));
 			},
 

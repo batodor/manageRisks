@@ -33,9 +33,9 @@
 			<List
 				id="list"
 				items="{
-					path: '/CounterpartyListSet',
+					path: '/DealSet',
 					sorter: {
-						path: 'Name',
+						path: 'TraderName',
 						descending: false
 					},
 					groupHeaderFactory: '.createGroupHeader'
@@ -62,9 +62,9 @@
 					<StandardListItem
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
 						press="onSelectionChange"
-						title="{Name}"
-						description="{ path: 'DateCreation', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"
-						info="{Code}">
+						title="{TraderName}"
+						description="{ path: 'CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"
+						info="{TCNumber}">
 					</StandardListItem>
 				</items>
 			</List>

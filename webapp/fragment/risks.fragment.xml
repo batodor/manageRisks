@@ -1,72 +1,75 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<l:VerticalLayout width="100%" >
-		<l:BlockLayoutCell>
-			<OverflowToolbar width="100%">
-				<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
-				<ToolbarSpacer/>
-			</OverflowToolbar>
-			<Table
-				id="risksTable"
-				width="auto"
-				items="{ToComplianceRisks}"
-				updateFinished="onRisksUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-				<columns>
-					<Column width="120px"><Text class="black" text="{i18n>counterparty}"/></Column>
-					<Column width="120px"><Text class="black" text="{i18n>type}"/></Column>
-					<Column><Text class="black" text="{i18n>description}"/></Column>
-					<Column><Text class="black" text="{i18n>recommendedActions}"/></Column>
-					<Column width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
-					<Column width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
-					<Column width="80px"><Text class="black" text="{i18n>agreement}"/></Column>
-					<Column width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
-					<Column><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<Text text="{Counterparty}"/>
-							<Text custom:key="{RiskType}" text="{Type}"/>
-							<Text text="{Description}"/>
-							<Text text="{Actions}"/>
-							<Text custom:key="{DateFrom}"
-								text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-							<Text custom:key="{DateTo}"
-								text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-							<CheckBox selected="{Actual}" editable="false"/>
-							<CheckBox selected="{CommentOfLawyer}" editable="false"/>
-						</cells>
-					</ColumnListItem>	
-				</items>
-			</Table>
-		</l:BlockLayoutCell>
-	</l:VerticalLayout>
-	<l:VerticalLayout width="100%" >
-		<l:BlockLayoutCell>
-			<OverflowToolbar width="400px">
-				<Title text="{i18n>risksByCountry}" titleStyle="H3"/>
-				<ToolbarSpacer/>
-			</OverflowToolbar>
-			<Table
-				id="risksCountryTable"
-				width="400px"
-				updateFinished="onRisksUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-				<columns>
-					<Column hAlign="Center"><Text class="black" text="{i18n>country}"/></Column>
-					<Column hAlign="Center"><Text class="black" text="{i18n>sanctions}"/></Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<Text text="{Counterparty}"/>
-							<CheckBox enabled="false" selected="{Canctions}"/>
-						</cells>
-					</ColumnListItem>	
-				</items>
-			</Table>
-		</l:BlockLayoutCell>
+	<l:VerticalLayout id="risksFragment" width="100%" >
+		<l:VerticalLayout width="100%" >
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
+					<ToolbarSpacer/>
+				</OverflowToolbar>
+				<Table
+					id="risksTable"
+					width="auto"
+					items="{ToRisksCounterparty}"
+					updateFinished="onRisksUpdateFinished"
+					noDataText="{i18n>detailLineItemTableNoDataText}"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+					<columns>
+						<Column width="120px"><Text class="black" text="{i18n>counterparty}"/></Column>
+						<Column width="120px"><Text class="black" text="{i18n>type}"/></Column>
+						<Column><Text class="black" text="{i18n>description}"/></Column>
+						<Column><Text class="black" text="{i18n>recommendedActions}"/></Column>
+						<Column width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
+						<Column width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
+						<Column width="80px"><Text class="black" text="{i18n>agreement}"/></Column>
+						<Column width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
+						<Column><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Counterparty}"/>
+								<Text custom:key="{RiskType}" text="{Type}"/>
+								<Text text="{Description}"/>
+								<Text text="{Actions}"/>
+								<Text custom:key="{DateFrom}"
+									text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								<Text custom:key="{DateTo}"
+									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								<CheckBox selected="{Actual}" editable="false"/>
+								<CheckBox selected="{CommentOfLawyer}" editable="false"/>
+							</cells>
+						</ColumnListItem>	
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:VerticalLayout>
+		<l:VerticalLayout width="100%" >
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="400px">
+					<Title text="{i18n>risksByCountry}" titleStyle="H3"/>
+					<ToolbarSpacer/>
+				</OverflowToolbar>
+				<Table
+					id="risksCountryTable"
+					width="400px"
+					items="{ToRisksCountry}"
+					updateFinished="onRisksUpdateFinished"
+					noDataText="{i18n>detailLineItemTableNoDataText}"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+					<columns>
+						<Column hAlign="Center"><Text class="black" text="{i18n>country}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>sanctions}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Country}"/>
+								<CheckBox enabled="false" selected="{Sanctions}"/>
+							</cells>
+						</ColumnListItem>	
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:VerticalLayout>
 	</l:VerticalLayout>
 </core:FragmentDefinition>

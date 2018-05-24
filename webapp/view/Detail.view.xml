@@ -13,7 +13,6 @@
 		navButtonPress="onNavBack"
 		showNavButton="{device>/system/phone}"
 		title="{i18n>detailTitle}"
-		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
 
 		<semantic:content>
@@ -21,16 +20,18 @@
 				id="objectHeader"
 				title="{Name}">
 			</ObjectHeader>
-			<IconTabBar id="itbMain" select="onTabSelected" selectedKey="dashboard">
-				<items>
-					<IconTabFilter text="{i18n>manageRisks}" key="risks">
-						<core:Fragment fragmentName="fragment.risks" type="XML"></core:Fragment>
-					</IconTabFilter>
-					<IconTabFilter text="{i18n>manageLimits}" key="limits">
-						<core:Fragment fragmentName="fragment.limits" type="XML"></core:Fragment>
-					</IconTabFilter>
-				</items>
-			</IconTabBar>
+			<core:Fragment fragmentName="fragment.risks" type="XML"></core:Fragment>
+			<core:Fragment fragmentName="fragment.limits" type="XML"></core:Fragment>
+			<!--<IconTabBar id="itbMain" select="onTabSelected" selectedKey="dashboard">-->
+			<!--	<items>-->
+			<!--		<IconTabFilter text="{i18n>manageRisks}" key="risks">-->
+						
+			<!--		</IconTabFilter>-->
+			<!--		<IconTabFilter text="{i18n>manageLimits}" key="limits">-->
+						
+			<!--		</IconTabFilter>-->
+			<!--	</items>-->
+			<!--</IconTabBar>-->
 		</semantic:content>
 		
 		<semantic:mainAction>

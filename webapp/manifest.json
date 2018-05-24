@@ -11,7 +11,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/ZTS_MD_BP_SRV/",
+				"uri": "/sap/opu/odata/sap/ZTS_LAWYER_APP_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -99,7 +99,7 @@
 					]
 				},
 				{
-					"pattern": "CounterpartyListSet/{objectId}",
+					"pattern": "Deal/{TCNumber}/Type/{ItemType}",
 					"name": "object",
 					"target": [
 						"master",

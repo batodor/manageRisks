@@ -141,6 +141,11 @@ sap.ui.define([
 					oElement.bindElement(url);
 				}
 			},
+			
+			gotoBP: function(oEvent){
+				var counterParty = oEvent.getSource().data("key");
+				window.open("https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&/CounterpartyHeaderSet/" + counterParty);
+			},
 
 			_onBindingChange : function () {
 				var oView = this.getView(),

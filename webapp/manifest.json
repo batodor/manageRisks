@@ -91,7 +91,7 @@
 			},
 			"routes": [
 				{
-					"pattern": "",
+					"pattern": "/{ItemType}",
 					"name": "master",
 					"target": [
 						"object",

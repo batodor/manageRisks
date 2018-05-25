@@ -3,7 +3,7 @@
 		<l:BlockLayoutRow id="ratingElement">
 			<l:BlockLayoutCell width="2">
 				<Label class="black" text="{i18n>counterparty}:" width="240px"/>
-				<Label text="{Counterparty} - {CounterpartyName}"/>
+				<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rating}:" width="240px"/>
 				<Label text="{Rating}"/>

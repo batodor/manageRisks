@@ -115,7 +115,7 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery) {
-					this._oListFilterState.aSearch = [new Filter("Name", FilterOperator.Contains, sQuery)];
+					this._oListFilterState.aSearch = [new Filter("TraderName", FilterOperator.Contains, sQuery)];
 				} else {
 					this._oListFilterState.aSearch = [];
 				}
@@ -216,22 +216,13 @@ sap.ui.define([
 			 * listLoading is done and the first item in the list is known
 			 * @private
 			 */
-			_onMasterMatched :  function() {
-				this.getOwnerComponent().oListSelector.oWhenListLoadingIsDone.then(
-					function (mParams) {
-						if (mParams.list.getMode() === "None") {
-							return;
-						}
-						//var sObjectId = mParams.firstListitem.getBindingContext().getProperty("Code");
-						//this.getRouter().navTo("object", {TCNumber : "307", ItemType: "R"}, true);
-					}.bind(this),
-					function (mParams) {
-						if (mParams.error) {
-							return;
-						}
-						this.getRouter().getTargets().display("detailNoObjectsAvailable");
-					}.bind(this)
-				);
+			_onMasterMatched :  function(oEvent) {
+				var type = oEvent.getParameter("arguments").ItemType;
+				var that = this; 
+				this._oList.attachEventOnce("updateFinished", function(){
+					that._oListFilterState.aSearch.concat(new Filter("ItemType", FilterOperator.EQ, type));
+					that._applyFilterSearch();
+				});
 				this.getCount();
 			},
 			

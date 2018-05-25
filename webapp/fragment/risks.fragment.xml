@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<l:VerticalLayout id="risksFragment" width="100%" >
+	<l:VerticalLayout id="risksFragment" width="100%" visible="false">
 		<l:VerticalLayout width="100%" >
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="100%">

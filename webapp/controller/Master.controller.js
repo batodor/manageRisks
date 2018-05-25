@@ -222,8 +222,8 @@ sap.ui.define([
 						if (mParams.list.getMode() === "None") {
 							return;
 						}
-						var sObjectId = mParams.firstListitem.getBindingContext().getProperty("Code");
-						this.getRouter().navTo("object", {objectId : sObjectId}, true);
+						//var sObjectId = mParams.firstListitem.getBindingContext().getProperty("Code");
+						//this.getRouter().navTo("object", {TCNumber : "307", ItemType: "R"}, true);
 					}.bind(this),
 					function (mParams) {
 						if (mParams.error) {

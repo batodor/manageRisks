@@ -1,15 +1,15 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<l:BlockLayout id="limitsFragment">
+	<l:BlockLayout id="limitsFragment" visible="false">
 		<l:BlockLayoutRow id="ratingElement">
 			<l:BlockLayoutCell width="2">
 				<Label class="black" text="{i18n>counterparty}:" width="240px"/>
-				<Label text="{Counterparty}"/>
+				<Label text="{Counterparty} - {CounterpartyName}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rating}:" width="240px"/>
-				<Label text="{RatingSet}"/>
+				<Label text="{Rating}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>updateDate}:" width="240px"/>
-				<Label custom:key="{Date}" text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<Label text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
 				<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>

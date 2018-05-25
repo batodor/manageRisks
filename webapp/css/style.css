@@ -9,6 +9,14 @@ div[id*="ratingElement"] .sapMCbBg{
 	height: 3rem;
 }
 
+table[id*="risksCountryTable"] .sapMCbMarkChecked {
+    border-color: red !important;
+}
+
+table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
+    color: red !important;
+}
+
 /* ---- UTIS SUEK THEME ---- */
 .sapUiTheme-utistheme1 div[id*="master"] .sapMLIB.sapMLIBSelected{
 	background: rgba(100,100,100,.2);

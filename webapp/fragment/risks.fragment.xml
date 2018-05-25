@@ -15,14 +15,14 @@
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column width="100px"><Text class="black" text="{i18n>counterparty}"/></Column>
-						<Column width="50px"><Text class="black" text="{i18n>type}"/></Column>
-						<Column><Text class="black" text="{i18n>description}"/></Column>
-						<Column><Text class="black" text="{i18n>recommendedActions}"/></Column>
-						<Column width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
-						<Column width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
-						<Column width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
-						<Column><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
+						<Column hAlign="Center" width="100px"><Text class="black" text="{i18n>counterparty}"/></Column>
+						<Column hAlign="Center" width="50px"><Text class="black" text="{i18n>type}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>description}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>recommendedActions}"/></Column>
+						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
+						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
+						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>

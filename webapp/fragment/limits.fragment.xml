@@ -29,9 +29,9 @@
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column><Text class="black" text="{i18n>tonnage}"/></Column>
-						<Column><Text class="black" text="{i18n>period}"/></Column>
-						<Column><Text class="black" text="{i18n>paymentTerm}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>period}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>paymentTerm}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -57,9 +57,9 @@
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column><Text class="black" text="{i18n>durationInDays}"/></Column>
-						<Column><Text class="black" text="{i18n>tonnage}"/></Column>
-						<Column><Text class="black" text="{i18n>info}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>durationInDays}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>info}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>

@@ -16,18 +16,16 @@
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>
-			<l:BlockLayoutCell width="2">
-				<OverflowToolbar width="100%">
-					<Title text="{i18n>limitsByCurrentRating}" titleStyle="H3"/>
-				</OverflowToolbar>
-			</l:BlockLayoutCell>
-		</l:BlockLayoutRow>
-		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>currentLimits}" id="limits1Title" titleStyle="H3"/>
+				</OverflowToolbar>
 				<Table
-					id="limitsTable1"
+					id="limits1Table"
+					custom:id="limits1"
 					width="100%"
-					updateFinished="onLimitsUpdateFinished"
+					items="{}"
+					updateFinished="onUpdateFinished"
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
@@ -47,14 +45,18 @@
 				</Table>
 			</l:BlockLayoutCell>
 			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
+				</OverflowToolbar>
 				<Table
-					id="limitsTable2"
+					id="limits2Table"
+					custom:id="limits2"
 					width="100%"
-					updateFinished="onLimitsUpdateFinished"
+					items="{}"
+					updateFinished="onUpdateFinished"
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column><Text class="black" text="{i18n>variant}"/></Column>
 						<Column><Text class="black" text="{i18n>durationInDays}"/></Column>
 						<Column><Text class="black" text="{i18n>tonnage}"/></Column>
 						<Column><Text class="black" text="{i18n>info}"/></Column>
@@ -62,7 +64,6 @@
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Text text="{Actions}"/>
 								<Text text="{Duration}"/>
 								<Text text="{Тonnage}"/>
 								<Text text="{Info}"/>

@@ -19,7 +19,6 @@ sap.ui.define([
 				// detail page is busy indication immediately so there is no break in
 				// between the busy indication for loading the view's meta data
 				var oViewModel = new JSONModel({
-					busy : false,
 					delay : 0,
 					lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
 				});
@@ -73,36 +72,15 @@ sap.ui.define([
 			 * @param {object} oEvent an event containing the total number of items in the list
 			 * @private
 			 */
-			onRisksUpdateFinished : function (oEvent) {
-				var sTitle,
+			onUpdateFinished : function (oEvent) {
+				var id = oEvent.getSource().data("id"),
+					sTitle = this.byId(id + "Title"),
 					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("detailView");
+					oTable = this.byId(id + "Table");
 
 				// only update the counter if the length is final
-				if (this.byId("risksTable").getBinding("items").isLengthFinal()) {
-					if (iTotalItems) {
-						sTitle = this.getResourceBundle().getText("detailLineItemTableHeadingCount", [iTotalItems]);
-					} else {
-						//Display 'Line Items' instead of 'Line items (0)'
-						sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
-					}
-					oViewModel.setProperty("/lineItemListTitle", sTitle);
-				}
-			},
-			onLimitsUpdateFinished : function (oEvent) {
-				var sTitle,
-					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("detailView");
-
-				// only update the counter if the length is final
-				if (this.byId("limitsTable").getBinding("items").isLengthFinal()) {
-					if (iTotalItems) {
-						sTitle = this.getResourceBundle().getText("detailLineItemTableHeadingCount", [iTotalItems]);
-					} else {
-						//Display 'Line Items' instead of 'Line items (0)'
-						sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
-					}
-					oViewModel.setProperty("/lineItemListTitle", sTitle);
+				if (oTable.getBinding("items").isLengthFinal()) {
+					sTitle.setText(this.getResourceBundle().getText(id + "Title", [iTotalItems]));
 				}
 			},
 
@@ -124,47 +102,44 @@ sap.ui.define([
 				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
 				var ItemType = oEvent.getParameter("arguments").ItemType;
 				this.getModel().metadataLoaded().then( function() {
-					if(ItemType === "R"){
-						risks.setVisible(true);
-					}else if(ItemType === "L"){
-						limits.setVisible(true);
-					}
-					var sObjectPath = this.getModel().createKey("DealSet", {
+					var sObjectPath = this.getModel().createKey("/DealSet", {
 						TCNumber : TCNumber,
 						ItemType : ItemType
 					});
-					this._bindView("/" + sObjectPath);
+					if(ItemType === "R"){
+						risks.setVisible(true);
+						this.bindTable("risksTable", sObjectPath + "/ToRisksCounterparty");
+						this.bindTable("risksCountryTable", sObjectPath + "/ToRisksCountry");
+					}else if(ItemType === "L"){
+						limits.setVisible(true);
+						this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
+						//this.bindTable("limits1Table", sObjectPath + "/ToRisksCounterparty");
+						//this.bindTable("limits2Table", sObjectPath + "/ToRisksCountry");
+					}
 					
-					// this.byId('ratingElement').bindElement("/RisksByCounterpartySet('" + TCNumber +"')");
+					
 				}.bind(this));
 			},
-
-			/**
-			 * Binds the view to the object path. Makes sure that detail view displays
-			 * a busy indicator while data for the corresponding element binding is loaded.
-			 * @function
-			 * @param {string} sObjectPath path to the object to be bound to the view.
-			 * @private
-			 */
-			_bindView : function (sObjectPath) {
-				// Set busy indicator during view binding
-				var oViewModel = this.getModel("detailView");
-
-				// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
-				oViewModel.setProperty("/busy", false);
-
-				this.getView().bindElement({
-					path : sObjectPath,
-					events: {
-						change : this._onBindingChange.bind(this),
-						dataRequested : function () {
-							oViewModel.setProperty("/busy", true);
-						},
-						dataReceived: function () {
-							oViewModel.setProperty("/busy", false);
-						}
-					}
-				});
+			
+			// Bind table function for all tables
+			// tableId = id of table, url = full path of binding
+			bindTable: function(id, url){
+				var oTable = this.byId(id, url);
+				if(oTable["mBindingInfos"].items.path !== url){
+					oTable.bindItems({
+						path: url,
+						template: oTable['mBindingInfos'].items.template
+					});
+				}
+			},
+			
+			// Bind element function for all elements
+			// tableId = id of element, url = full path of binding, update = flag if the operation is update
+			bindElement: function(elementId, url, update){
+				var oElement = this.byId(elementId);
+				if(Object.keys(oElement.mElementBindingContexts).length === 0 || update){
+					oElement.bindElement(url);
+				}
 			},
 
 			_onBindingChange : function () {

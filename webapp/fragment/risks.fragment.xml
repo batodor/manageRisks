@@ -3,40 +3,41 @@
 		<l:VerticalLayout width="100%" >
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="100%">
-					<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
+					<Title text="{i18n>complianceRisks}" id="risksTitle" titleStyle="H3"/>
 					<ToolbarSpacer/>
 				</OverflowToolbar>
 				<Table
 					id="risksTable"
 					width="auto"
-					items="{ToRisksCounterparty}"
-					updateFinished="onRisksUpdateFinished"
+					custom:id="risks"
+					items="{}"
+					updateFinished="onUpdateFinished"
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column width="120px"><Text class="black" text="{i18n>counterparty}"/></Column>
-						<Column width="120px"><Text class="black" text="{i18n>type}"/></Column>
+						<Column width="100px"><Text class="black" text="{i18n>counterparty}"/></Column>
+						<Column width="50px"><Text class="black" text="{i18n>type}"/></Column>
 						<Column><Text class="black" text="{i18n>description}"/></Column>
 						<Column><Text class="black" text="{i18n>recommendedActions}"/></Column>
 						<Column width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
 						<Column width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
-						<Column width="80px"><Text class="black" text="{i18n>agreement}"/></Column>
 						<Column width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
 						<Column><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Text text="{Counterparty}"/>
-								<Text custom:key="{RiskType}" text="{Type}"/>
+								<Text text="{CustomerNumber}"/>
+								<Text custom:key="{RiskType}" text="{RiskType}"/>
 								<Text text="{Description}"/>
 								<Text text="{Actions}"/>
 								<Text custom:key="{DateFrom}"
 									text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<Text custom:key="{DateTo}"
 									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-								<CheckBox selected="{Actual}" editable="false"/>
-								<CheckBox selected="{CommentOfLawyer}" editable="false"/>
+								<Text text="{Agreement}"/>
+								<CheckBox selected="{Eliminated}" editable="false"/>
+								<CheckBox selected="{LawyerComment}" editable="false"/>
 							</cells>
 						</ColumnListItem>	
 					</items>
@@ -46,14 +47,15 @@
 		<l:VerticalLayout width="100%" >
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="400px">
-					<Title text="{i18n>risksByCountry}" titleStyle="H3"/>
+					<Title text="{i18n>risksCountry}" id="risksCountryTitle" titleStyle="H3"/>
 					<ToolbarSpacer/>
 				</OverflowToolbar>
 				<Table
 					id="risksCountryTable"
 					width="400px"
-					items="{ToRisksCountry}"
-					updateFinished="onRisksUpdateFinished"
+					items="{}"
+					custom:id="risksCountry"
+					updateFinished="onUpdateFinished"
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>

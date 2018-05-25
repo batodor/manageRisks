@@ -54,7 +54,8 @@ sap.ui.define([
 						this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
 					}.bind(this)
 				});
-
+				
+				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 			},
@@ -232,6 +233,18 @@ sap.ui.define([
 					}.bind(this)
 				);
 				this.getCount();
+			},
+			
+			_onObjectMatched : function (oEvent) {
+				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
+				this._oList.attachEventOnce("updateFinished", function(){
+					var items = this.getItems();
+					for(var i in items){
+						if(items[i].getProperty("info") === TCNumber){
+							items[i].setSelected(true);
+						}
+					}
+				});
 			},
 
 			/**

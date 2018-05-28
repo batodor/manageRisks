@@ -58,6 +58,14 @@ sap.ui.define([
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
+				
+				var eventBus = sap.ui.getCore().getEventBus();
+			    eventBus.subscribe("DetailMasterChannel", "onApproveEvent", this.onDataReceived, this);
+			},
+			
+			// Passed data from Detail controller
+			onDataReceived : function(channel, event) {
+				this._oList.getModel().refresh();
 			},
 			
 			// Getting count of table, oTable = object table, oText = object text, tableId = string table id

@@ -2,8 +2,10 @@
 sap.ui.define([
 		"managerisks/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"managerisks/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+		"managerisks/model/formatter",
+		'sap/m/MessageToast',
+		'sap/m/MessageBox'
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("managerisks.controller.Detail", {
@@ -99,18 +101,18 @@ sap.ui.define([
 				var limits = this.byId('limitsFragment');
 				risks.setVisible(false);
 				limits.setVisible(false);
-				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
-				var ItemType = oEvent.getParameter("arguments").ItemType;
+				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
+				this.ItemType = oEvent.getParameter("arguments").ItemType;
 				this.getModel().metadataLoaded().then( function() {
 					var sObjectPath = this.getModel().createKey("/DealSet", {
-						TCNumber : TCNumber,
-						ItemType : ItemType
+						TCNumber : this.TCNumber,
+						ItemType : this.ItemType
 					});
-					if(ItemType === "R"){
+					if(this.ItemType === "R"){
 						risks.setVisible(true);
 						this.bindTable("risksTable", sObjectPath + "/ToRisksCounterparty");
 						this.bindTable("risksCountryTable", sObjectPath + "/ToRisksCountry");
-					}else if(ItemType === "L"){
+					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
 						this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
 						//this.bindTable("limits1Table", sObjectPath + "/ToRisksCounterparty");
@@ -198,6 +200,32 @@ sap.ui.define([
 				oViewModel.setProperty("/busy", true);
 				// Restore original busy indicator delay for the detail view
 				oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
+			},
+			
+			approve: function(){
+				if(this.ItemType === "R"){
+					var oFuncParams = { 
+						TCNumber: this.TCNumber
+					};
+					this.getModel().callFunction("/ApproveRisks", {
+						method: "POST",
+						urlParameters: oFuncParams,
+						success: this.onRisksApproveSuccess.bind(this)
+					});
+				}else{
+					MessageToast.show("Limits will work tommorow!");
+				}
+			},
+			
+			onRisksApproveSuccess: function(oData, response) {
+				var oResult = oData.ApproveRisks;
+				if (oResult.ActionSuccessful) {
+					MessageToast.show(oResult.Message);
+					var eventBus = sap.ui.getCore().getEventBus();
+					eventBus.publish("DetailMasterChannel", "onApproveEvent");
+				} else {
+					MessageBox.error(oResult.Message);
+				}
 			}
 
 		});

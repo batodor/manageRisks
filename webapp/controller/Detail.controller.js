@@ -30,6 +30,9 @@ sap.ui.define([
 				this.setModel(oViewModel, "detailView");
 
 				this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+				
+				this.risksDialog = sap.ui.xmlfragment("fragment.risksDialog", this);
+				this.getView().addDependent(this.risksDialog);
 			},
 
 			/* =========================================================== */
@@ -226,6 +229,28 @@ sap.ui.define([
 				} else {
 					MessageBox.error(oResult.Message);
 				}
+			},
+			
+			onTableClick: function(oEvent){
+				var oContext = oEvent.getParameters("listItem").listItem.getBindingContext();
+				var path = oContext.getPath();
+				var data = oContext.getModel().getData(path);
+				var id = oEvent.getSource().data("id");
+				var oDialog = sap.ui.getCore().byId(id + "Dialog");
+				oDialog.unbindElement();
+				oDialog.setTitle(data.CounterpartyName);
+				oDialog.bindElement(path);
+				this.risksDialog.open();
+			},
+			
+			dialogClose: function(oEvent){
+				var id = oEvent.getSource().data("id");
+				this[id + "Dialog"].close();
+			},
+			
+			dialogSave: function(oEvent){
+				var id = oEvent.getSource().data("id");
+				this[id + "Dialog"].close();
 			}
 
 		});

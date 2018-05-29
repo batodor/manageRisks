@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog class="sapUiContentPadding" id="risksDialog">
+		<content>
+			<Text text="{i18n>counterparty}" width="150px"/>
+			<Input value="{TCNumber} - {CounterpartyName}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>type}" width="150px"/>
+			<Input value="{RiskType}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>dateFrom}" width="150px"/>
+			<DatePicker dateValue="{DateFrom}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>dateTo}" width="150px"/>
+			<DatePicker dateValue="{DateTo}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>description}" width="150px"/>
+			<TextArea value="{Description}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>recommendedActions}" width="150px"/>
+			<TextArea value="{Actions}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>agreement}" width="150px"/>
+			<TextArea value="{Agreement}" width="300px" enabled="false"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>commentOfLawyer}" width="150px"/>
+			<TextArea value="{LawyerComment}" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>eliminated}" width="150px"/>
+			<CheckBox selected="{Eliminated}" />
+			<ToolbarSpacer/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogClose"/>
+			<Button text="{i18n>save}" custom:id="risks" type="Accept" press="dialogSave"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

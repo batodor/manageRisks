@@ -11,33 +11,28 @@
 					width="auto"
 					custom:id="risks"
 					items="{}"
+					mode="SingleSelectMaster"
+					includeItemInSelection="true"
+					select="onTableClick"
 					updateFinished="onUpdateFinished"
+					alternateRowColors="true"
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column hAlign="Center" width="100px"><Text class="black" text="{i18n>counterparty}"/></Column>
+						<Column><Text class="black" text="{i18n>counterparty}"/></Column>
 						<Column hAlign="Center" width="50px"><Text class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>description}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>recommendedActions}"/></Column>
 						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>dateFrom}"/></Column>
 						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>dateTo}"/></Column>
 						<Column hAlign="Center" width="80px"><Text class="black" text="{i18n>eliminated}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>commentOfLawyer}"/></Column>
 					</columns>
 					<items>
-						<ColumnListItem>
+						<ColumnListItem type="Navigation">
 							<cells>
-								<Text text="{CustomerNumber}"/>
-								<Text custom:key="{RiskType}" text="{RiskType}"/>
-								<Text text="{Description}"/>
-								<Text text="{Actions}"/>
-								<Text custom:key="{DateFrom}"
-									text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-								<Text custom:key="{DateTo}"
-									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-								<Text text="{Agreement}"/>
+								<Text text="{CounterpartyName}"/>
+								<Text text="{RiskType}"/>
+								<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+								<Text text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 								<CheckBox selected="{Eliminated}" editable="false"/>
-								<CheckBox selected="{LawyerComment}" editable="false"/>
 							</cells>
 						</ColumnListItem>	
 					</items>

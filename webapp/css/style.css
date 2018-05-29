@@ -18,6 +18,13 @@ table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
 }
 
 /* ---- UTIS SUEK THEME ---- */
+
+.sapUiTheme-utistheme1 .sapMTextAreaInner{
+	min-height: 47px;
+	padding: 0.1875rem 0.5rem;
+	line-height: 1.4;
+}
+
 .sapUiTheme-utistheme1 div[id*="master"] .sapMLIB.sapMLIBSelected{
 	background: rgba(100,100,100,.2);
 }

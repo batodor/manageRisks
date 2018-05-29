@@ -2,16 +2,18 @@
 	<Dialog class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Text text="{i18n>counterparty}" width="150px"/>
-			<Input value="{TCNumber} - {CounterpartyName}" width="300px"/>
+			<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>type}" width="150px"/>
-			<Input value="{RiskType}" width="300px"/>
+			<Text text="" width="150px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>riskType}" width="150px"/>
+			<Input value="{RiskType} - {RiskItem}" width="300px" enabled="false" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
-			<DatePicker dateValue="{DateFrom}" width="300px"/>
+			<DatePicker dateValue="{DateFrom}" enabled="false" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="150px"/>
-			<DatePicker dateValue="{DateTo}" width="300px"/>
+			<DatePicker dateValue="{DateTo}" enabled="false" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="150px"/>
 			<TextArea value="{Description}" width="300px"/>

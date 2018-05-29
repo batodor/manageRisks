@@ -250,7 +250,31 @@ sap.ui.define([
 			
 			dialogSave: function(oEvent){
 				var id = oEvent.getSource().data("id");
+				var dialog = sap.ui.getCore().byId(id + "Dialog");
+				var oData = this.getOdata(dialog);
+				var url = dialog.getBindingContext().getPath();
+				dialog.unbindElement();
+				dialog.getModel().update(url, oData);
 				this[id + "Dialog"].close();
+			},
+			
+			// Set odata from any dialog, oDialog = object dialog / return object Data
+			getOdata: function(oDialog){
+				var oData = {};
+				var inputs = oDialog.getAggregation("content");
+				var typeArr = ["value", "dateValue", "selectedKey", "selected"];
+				for(var i in inputs){
+					var input = inputs[i];
+					for(var j in typeArr){
+						var type = typeArr[j];
+						if(input.getBindingInfo(type)){
+							var value = input.getProperty(type);
+							var name = input.getBindingInfo(type).binding.sPath;
+							oData[name] = value;
+						}
+					}
+				}
+				return oData;
 			}
 
 		});

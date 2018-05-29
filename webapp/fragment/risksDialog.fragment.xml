@@ -4,16 +4,14 @@
 			<Text text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="" width="150px"/>
-			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Input value="{RiskType} - {RiskItem}" width="300px" enabled="false" />
+			<Text text="{RiskType} - {RiskItem}" width="300px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
-			<DatePicker dateValue="{DateFrom}" enabled="false" width="300px"/>
+			<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="150px"/>
-			<DatePicker dateValue="{DateTo}" enabled="false" width="300px"/>
+			<Text text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="150px"/>
 			<TextArea value="{Description}" width="300px"/>
@@ -30,6 +28,13 @@
 			<Text text="{i18n>eliminated}" width="150px"/>
 			<CheckBox selected="{Eliminated}" />
 			<ToolbarSpacer/>
+			
+			<Input value="{RiskType}" width="300px" visible="false" />
+			<Input value="{RiskItem}" width="300px" visible="false" />
+			<Input value="{Counterparty}" width="300px" visible="false" />
+			<Input value="{CounterpartyName}" width="300px" visible="false" />
+			<DatePicker dateValue="{DateFrom}" width="300px" visible="false" />
+			<DatePicker dateValue="{DateTo}" width="300px" visible="false" />
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogClose"/>

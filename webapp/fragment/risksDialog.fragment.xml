@@ -5,7 +5,7 @@
 			<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Text text="{RiskType} - {RiskItem}" width="300px" />
+			<Text text="{RiskType} - {RiskTypeDescr}" width="300px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
 			<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }" width="300px"/>

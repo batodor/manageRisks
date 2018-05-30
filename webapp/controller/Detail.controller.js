@@ -245,17 +245,20 @@ sap.ui.define([
 			
 			dialogClose: function(oEvent){
 				var id = oEvent.getSource().data("id");
+				this.byId(id + "Table").removeSelections();
 				this[id + "Dialog"].close();
 			},
 			
 			dialogSave: function(oEvent){
 				var id = oEvent.getSource().data("id");
 				var dialog = sap.ui.getCore().byId(id + "Dialog");
-				var oData = this.getOdata(dialog);
 				var url = dialog.getBindingContext().getPath();
+				var inputData = this.getOdata(dialog);
+				var modelData = dialog.getModel().getData(url);
+				var changedData = this.compareDatas(inputData, modelData);
 				dialog.unbindElement();
-				dialog.getModel().update(url, oData);
-				this[id + "Dialog"].close();
+				dialog.getModel().update(url, changedData);
+				this.dialogClose(oEvent);
 			},
 			
 			// Set odata from any dialog, oDialog = object dialog / return object Data
@@ -275,6 +278,19 @@ sap.ui.define([
 					}
 				}
 				return oData;
+			},
+			
+			// Compare input and model datas
+			// outputs only modified data
+			compareDatas: function(inputData, modelData){
+				var keys = Object.keys(inputData);
+				var changedData = {};
+				for(var i in keys){
+					if(inputData[keys[i]] !== modelData[keys[i]]){
+						changedData[keys[i]] = inputData[keys[i]];
+					}
+				}
+				return changedData;
 			}
 
 		});

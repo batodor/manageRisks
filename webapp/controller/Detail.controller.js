@@ -106,6 +106,10 @@ sap.ui.define([
 				limits.setVisible(false);
 				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
 				this.ItemType = oEvent.getParameter("arguments").ItemType;
+				
+				this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle") + " " + this.TCNumber);
+				this.byId("openDeal").setEnabled(true);
+				
 				this.getModel().metadataLoaded().then( function() {
 					var sObjectPath = this.getModel().createKey("/DealSet", {
 						TCNumber : this.TCNumber,
@@ -218,6 +222,10 @@ sap.ui.define([
 				}else{
 					MessageToast.show("Limits will work tommorow!");
 				}
+			},
+			
+			openDeal: function(){
+				window.open("https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 			},
 			
 			onRisksApproveSuccess: function(oData, response) {

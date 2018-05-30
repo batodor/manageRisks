@@ -23,23 +23,12 @@
 			<core:Fragment fragmentName="fragment.risks" type="XML"></core:Fragment>
 			<core:Fragment fragmentName="fragment.limits" type="XML"></core:Fragment>
 		</semantic:content>
-		
-		<semantic:mainAction>
-			<semantic:MainAction
-				press="openDeal"
-				text="{i18n>openDeal}" />
-		</semantic:mainAction>
-		<semantic:saveAsTileAction>
-			<Button
-				press="save"
-				type="Accept"
-				text="{i18n>save}" />
-		</semantic:saveAsTileAction>
-		<semantic:positiveAction>
-			<semantic:PositiveAction
-				press="approve"
-				text="{i18n>approve}" />
-		</semantic:positiveAction>
+		<semantic:customFooterContent>
+			<Button enabled="false" press="openDeal" id="openDeal" text="{i18n>openDeal}" type="Emphasized" />
+			<ToolbarSpacer />
+			<Button press="save" type="Ghost" text="{i18n>save}" />
+			<Button press="approve" type="Accept" text="{i18n>approve}" />
+		</semantic:customFooterContent>
 		
 	</semantic:DetailPage>
 

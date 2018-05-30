@@ -8,6 +8,9 @@ div[id*="ratingElement"] .sapMCbBg{
 .sapUiSizeCompact .sapMTB{
 	height: 3rem;
 }
+.sapContrast div:first-child{
+	display: none;
+}
 
 table[id*="risksCountryTable"] .sapMCbMarkChecked {
     border-color: red !important;

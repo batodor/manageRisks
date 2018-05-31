@@ -8,7 +8,7 @@ div[id*="ratingElement"] .sapMCbBg{
 .sapUiSizeCompact .sapMTB{
 	height: 3rem;
 }
-.sapContrast div:first-child{
+.sapMPageFooter .sapContrast div:first-child{
 	display: none;
 }
 

@@ -123,7 +123,7 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery) {
-					this._oListFilterState.aSearch = [new Filter("TraderName", FilterOperator.Contains, sQuery)];
+					this._oListFilterState.aSearch = [new Filter({path: "TraderName", operator: FilterOperator.Contains, value1: sQuery })];
 				} else {
 					this._oListFilterState.aSearch = [];
 				}
@@ -227,8 +227,8 @@ sap.ui.define([
 			_onMasterMatched :  function(oEvent) {
 				var type = oEvent.getParameter("arguments").ItemType;
 				var that = this; 
+				this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
 				this._oList.attachEventOnce("updateFinished", function(){
-					that._oListFilterState.aSearch.concat(new Filter("ItemType", FilterOperator.EQ, type));
 					that._applyFilterSearch();
 				});
 				this.getCount();
@@ -281,7 +281,8 @@ sap.ui.define([
 			_applyFilterSearch : function () {
 				var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
 					oViewModel = this.getModel("masterView");
-				this._oList.getBinding("items").filter(aFilters, "Application");
+				var newFilter = new Filter({ filters: aFilters, and: true });
+				this._oList.getBinding("items").filter(newFilter, "Application");
 				// changes the noDataText of the list in case there are no filter results
 				if (aFilters.length !== 0) {
 					oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataWithFilterOrSearchText"));

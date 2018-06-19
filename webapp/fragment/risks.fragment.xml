@@ -5,13 +5,16 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>complianceRisks}" id="risksTitle" titleStyle="H3"/>
 					<ToolbarSpacer/>
+					<Button custom:id="risks" text="{i18n>add}" press="tableAdd"/>
+					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="risksDelete" custom:id="risks" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table
 					id="risksTable"
 					width="auto"
 					custom:id="risks"
 					items="{}"
-					mode="SingleSelectMaster"
+					mode="SingleSelectLeft"
 					includeItemInSelection="true"
 					select="onTableClick"
 					updateFinished="onUpdateFinished"

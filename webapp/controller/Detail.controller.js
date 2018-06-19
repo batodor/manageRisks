@@ -24,6 +24,8 @@ sap.ui.define([
 					delay : 0,
 					lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
 				});
+				
+				this.typeArr = ["value", "dateValue", "selectedKey", "selected"];
 
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
@@ -31,8 +33,12 @@ sap.ui.define([
 
 				this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 				
+				// Bind dialog to view
 				this.risksDialog = sap.ui.xmlfragment("fragment.risksDialog", this);
 				this.getView().addDependent(this.risksDialog);
+				
+				// Bind double click event
+				this.byId("risksTable").ondblclick = this.onDoubleClick.bind(this, "risks");
 			},
 
 			/* =========================================================== */
@@ -239,24 +245,83 @@ sap.ui.define([
 				}
 			},
 			
-			onTableClick: function(oEvent){
-				var oContext = oEvent.getParameters("listItem").listItem.getBindingContext();
-				var path = oContext.getPath();
-				var data = oContext.getModel().getData(path);
+			// Table buttons function for create/edit/copy/delete of items
+			tableAdd: function(oEvent) {
 				var id = oEvent.getSource().data("id");
-				var oDialog = sap.ui.getCore().byId(id + "Dialog");
-				oDialog.unbindElement();
-				oDialog.setTitle(data.CounterpartyName);
-				oDialog.bindElement(path);
-				this.risksDialog.open();
+				var dialog = this[id + "Dialog"];
+				dialog.unbindElement();
+				this.setEnabledDialog(dialog, true);
+				sap.ui.getCore().byId(id + "EditContent").setVisible(false);
+				sap.ui.getCore().byId(id + "AddContent").setVisible(true);
+				var buttons = dialog.getButtons();
+				buttons[1].setVisible(true);
+				buttons[2].setVisible(false);
+				buttons[3].setVisible(false);
+				dialog.open();
+			},
+			tableEdit: function(oEvent) {
+				var id = oEvent.getSource().data("id");
+				var dialog = this[id + "Dialog"];
+				var url = this.byId(id + "Table").getSelectedItem().getBindingContextPath();
+				dialog.bindElement(url);
+				this.setEnabledDialog(dialog, false);
+				sap.ui.getCore().byId(id + "EditContent").setVisible(true);
+				sap.ui.getCore().byId(id + "AddContent").setVisible(false);
+				var buttons = dialog.getButtons();
+				buttons[1].setVisible(false);
+				buttons[2].setVisible(false);
+				buttons[3].setVisible(true).setEnabled(true);
+				dialog.open();
+			},
+			tableDelete: function(oEvent) {
+				var id = oEvent.getSource().data("id");
+				var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+				var url = table.getSelectedItem().getBindingContextPath();
+				var oModel = table.getModel();
+				MessageBox.confirm("Are you sure you want to delete?", {
+					actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+					onClose: function(sAction) {
+						if (sAction === "Delete") {
+							oModel.remove(url);              
+						} else {
+							MessageToast.show("Delete canceled!");
+						}
+					}
+				});
 			},
 			
-			dialogClose: function(oEvent){
+			onTableClick: function(oEvent){
+				var table = oEvent.getSource();
+				var selectedCount = table.getSelectedItems().length;
+				var id = table.data("id");
+				if (selectedCount > 0) {
+					this.setInputEnabled([id + "Delete", id + "Edit"], true);
+				} else {
+					this.setInputEnabled([id + "Delete", id + "Edit"], false);
+				}
+			},
+			
+			dialogCancel: function(oEvent){
 				var id = oEvent.getSource().data("id");
-				this.byId(id + "Table").removeSelections();
+				//this.byId(id + "Table").removeSelections();
 				this[id + "Dialog"].close();
 			},
-			
+			dialogAdd: function(oEvent) {
+				var button = oEvent.getSource();
+				var tableId = button.data("id");
+				var dialog = button.getParent();
+				var oModel = dialog.getModel();
+				var oData = this.getOdata(dialog);
+				var bCheckAlert = this.checkKeys(dialog);
+				if(bCheckAlert === "Please, enter"){
+					oModel.create("/" + tableId + "Set", oData);
+					this[tableId + "Dialog"].close();
+				}else{
+					MessageBox.alert(bCheckAlert.slice(0, -2), {
+						actions: [sap.m.MessageBox.Action.CLOSE]
+					});
+				}
+			},
 			dialogSave: function(oEvent){
 				var id = oEvent.getSource().data("id");
 				var dialog = sap.ui.getCore().byId(id + "Dialog");
@@ -268,19 +333,44 @@ sap.ui.define([
 				dialog.getModel().update(url, changedData);
 				this.dialogClose(oEvent);
 			},
+			dialogEdit: function(oEvent){
+				var button = oEvent.getSource();
+				var id = button.data("id");
+				var dialog = sap.ui.getCore().byId(id + "Dialog");
+				if(dialog.getButtons()[3].getEnabled()){
+					this.setDisabledDialog(dialog);
+					dialog.getButtons()[3].setEnabled(false);
+				}else{
+					this.setEnabledDialog(dialog, false);
+					dialog.getButtons()[3].setEnabled(true);
+				}
+			},
 			
-			// Set odata from any dialog, oDialog = object dialog / return object Data
-			getOdata: function(oDialog){
+			// Set odata from any dialog, argument oDialog = object dialog / return object inputs Data
+			getOdata: function(dialog){
 				var oData = {};
-				var inputs = oDialog.getAggregation("content");
-				var typeArr = ["value", "dateValue", "selectedKey", "selected"];
+				var inputs = dialog.getAggregation("content");
 				for(var i in inputs){
 					var input = inputs[i];
-					for(var j in typeArr){
-						var type = typeArr[j];
+					for(var j in this.typeArr){
+						var type = this.typeArr[j];
 						if(input.getBindingInfo(type)){
 							var value = input.getProperty(type);
 							var name = input.getBindingInfo(type).binding.sPath;
+							if(input["mProperties"].hasOwnProperty("type") && input.getType() === "Number"){
+								value = parseInt(value);
+							}
+							if(input.data("name")){
+								name = input.data("name");
+							}
+							if(input.hasOwnProperty("_oMaxDate")){
+								value = input.getDateValue();
+								if(value) {
+									value.setMinutes(-value.getTimezoneOffset());
+								} else { 
+									value = null;
+								}
+							}
 							oData[name] = value;
 						}
 					}
@@ -299,6 +389,90 @@ sap.ui.define([
 					}
 				}
 				return changedData;
+			},
+			
+			// Enable/Disables inputs depending flag arg
+			setInputEnabled: function(idArr, flag){
+				for(var i in idArr){
+					if(this.byId(idArr[i])){
+						this.byId(idArr[i]).setEnabled(flag);
+					}else if(sap.ui.getCore().byId(idArr[i])){
+						sap.ui.getCore().byId(idArr[i]).setEnabled(flag);
+					}
+				}
+			},
+			
+			// Set key inputs as disabled/enabled for editting
+			// Arguments: dialog = object dialog, flag = boolean flag for enabled/disabled
+			setEnabledDialog: function(dialog, flag){
+				var inputs = dialog.getAggregation("content");
+				for(var i in inputs){
+					for(var j in this.typeArr){
+						var type = this.typeArr[j];
+						var input = inputs[i];
+						if(input["mBindingInfos"].hasOwnProperty(type)){
+							if(input.data("key")){
+								input.setEnabled(flag);
+							}else{
+								input.setEnabled(true);
+							}
+						}
+					}
+					
+				}
+			},
+			
+			// Checks the key values to lock them on dialogEdit
+			checkKeys: function(dialog){
+				var check = this.getModel('i18n').getResourceBundle().getText("plsEnter");
+				var inputs = dialog.getAggregation("content");
+				for(var i in inputs){
+					var oInput = inputs[i];
+					if(oInput.data("key")){
+						if((oInput["mProperties"].hasOwnProperty("value") && !oInput.getValue()) || 
+						(oInput["mProperties"].hasOwnProperty("selectedKey") && !oInput.getSelectedKey()) ||
+						(oInput["mProperties"].hasOwnProperty("value") && !oInput.getValue()) ||
+						(oInput.hasOwnProperty("_oMaxDate") && !oInput.getDateValue())){
+							check = check + " " + this.getModel('i18n').getResourceBundle().getText(oInput.data("key")) + ", ";
+						}
+					}
+				}
+				return check;
+			},
+			
+			// Double click event to open dialog
+			onDoubleClick: function(id){
+				var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+				if(table.getSelectedItem()){
+					var dialog = this[id + "Dialog"];
+					var url = table.getSelectedItem().getBindingContextPath();
+					dialog.bindElement(url);
+					this.setDisabledDialog(dialog);
+					var buttons = dialog.getButtons();
+					buttons[1].setVisible(false);
+					buttons[2].setVisible(true);
+					buttons[3].setVisible(true).setEnabled(false);
+					sap.ui.getCore().byId(id + "EditContent").setVisible(true);
+					sap.ui.getCore().byId(id + "AddContent").setVisible(false);
+					dialog.open();
+				}else{
+					return true;
+				}
+			},
+			
+			// Set key all inputs as disabled for editting
+			// Arguments: dialog = object dialog
+			setDisabledDialog: function(dialog){
+				var inputs = dialog.getAggregation("content");
+				for(var i in inputs){
+					for(var j in this.typeArr){
+						var type = this.typeArr[j];
+						var input = inputs[i];
+						if(input["mBindingInfos"].hasOwnProperty(type)){
+							input.setEnabled(false);
+						}
+					}
+				}
 			}
 
 		});

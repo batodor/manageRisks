@@ -2,16 +2,23 @@
 	<Dialog class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Text text="{i18n>counterparty}" width="150px"/>
-			<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}" width="300px"/>
+			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="300px"/>
+			<Select selectedKey="{Counterparty}" custom:key="counterparty" forceSelection="false" id="risksAddContent" 
+				items="{ path: '/dictionaryCounterpartySet', sorter: { path: 'CounterpartyName' } }" width="300px">
+				<core:Item key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
+			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Text text="{RiskType} - {RiskTypeDescr}" width="300px" />
+			<Select selectedKey="{RiskType}" custom:key="riskType" forceSelection="false"
+				items="{ path: '/dictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
+				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeDescr}"/>
+			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
-			<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }" width="300px"/>
+			<DatePicker dateValue="{DateFrom}" custom:key="dateFrom" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="150px"/>
-			<Text text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }" width="300px"/>
+			<DatePicker dateValue="{DateTo}" custom:key="dateTo" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="150px"/>
 			<TextArea value="{Description}" width="300px"/>
@@ -20,7 +27,7 @@
 			<TextArea value="{Actions}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>agreement}" width="150px"/>
-			<TextArea value="{Agreement}" width="300px" enabled="false"/>
+			<TextArea value="{Agreement}" width="300px" custom:key="agreement" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>commentOfLawyer}" width="150px"/>
 			<TextArea value="{LawyerComment}" width="300px"/>
@@ -30,8 +37,10 @@
 			<ToolbarSpacer/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogClose"/>
-			<Button text="{i18n>save}" custom:id="risks" type="Accept" press="dialogSave"/>
+			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogCancel"/>
+			<Button text="{i18n>add}" custom:id="risks" visible="false" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>edit}" custom:id="risks" visible="false" type="Default" press="dialogEdit"/>
+			<Button text="{i18n>save}" custom:id="risks" visible="false" type="Accept" press="dialogSave"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

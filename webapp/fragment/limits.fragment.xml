@@ -31,6 +31,7 @@
 					<columns>
 						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
 						<Column hAlign="Center"><Text class="black" text="{i18n>period}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>paymentMethod}"/></Column>
 						<Column hAlign="Center"><Text class="black" text="{i18n>paymentTerm}"/></Column>
 					</columns>
 					<items>
@@ -38,39 +39,32 @@
 							<cells>
 								<Text text="{Тonnage}"/>
 								<Text text="{Period}"/>
+								<Text text="{PaymentMethod}"/>
 								<Text text="{PaymentTerm}"/>
 							</cells>
 						</ColumnListItem>	
 					</items>
 				</Table>
 			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table
-					id="limits2Table"
-					custom:id="limits2"
-					width="100%"
-					items="{}"
-					updateFinished="onUpdateFinished"
-					noDataText="{i18n>detailLineItemTableNoDataText}"
-					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-					<columns>
-						<Column hAlign="Center"><Text class="black" text="{i18n>durationInDays}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>info}"/></Column>
-					</columns>
-					<items>
-						<ColumnListItem>
-							<cells>
-								<Text text="{Duration}"/>
-								<Text text="{Тonnage}"/>
-								<Text text="{Info}"/>
-							</cells>
-						</ColumnListItem>	
-					</items>
-				</Table>
+				<Text class="black" text=""/>
+				<ToolbarSpacer/>
+				<Text class="black" text="{i18n>durationOnDays}:" width="200px"/>
+				<Text class="black" text="{DurationOnDays}"/>
+				<ToolbarSpacer/>
+				<Text class="black" text="{i18n>tonnage}:" width="200px"/>
+				<Text class="black" text="{Tonnage}"/>
+				<ToolbarSpacer/>
+				<Text class="black" text="{i18n>paymentMethod}:" width="200px"/>
+				<Text class="black" text="{PaymentMethod}"/>
+				<ToolbarSpacer/>
+				<Text class="black" text="{i18n>paymentTerms}:" width="200px"/>
+				<Text class="black" text="{PaymentTerms}"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>

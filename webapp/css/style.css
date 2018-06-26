@@ -19,6 +19,9 @@ table[id*="risksCountryTable"] .sapMCbMarkChecked {
 table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
     color: red !important;
 }
+.margin-bottom{
+	margin-bottom: 1rem;
+}
 
 /* ---- UTIS SUEK THEME ---- */
 
@@ -37,7 +40,7 @@ table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
 }
 
 .sapUiTheme-utistheme1 .sapUiBlockLayoutSizeM .sapUiBlockCellContent{
-	padding: 1rem;
+	padding: 1rem !important;
 }
 
 .sapUiTheme-utistheme1 .sapUiSizeCompact .sapMPageWithFooter>section{

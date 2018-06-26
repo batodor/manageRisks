@@ -32,7 +32,7 @@
 						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
 						<Column hAlign="Center"><Text class="black" text="{i18n>period}"/></Column>
 						<Column hAlign="Center"><Text class="black" text="{i18n>paymentMethod}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>paymentTerm}"/></Column>
+						<Column hAlign="Center"><Text class="black" text="{i18n>paymentTerms}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -40,7 +40,7 @@
 								<Text text="{Тonnage}"/>
 								<Text text="{Period}"/>
 								<Text text="{PaymentMethod}"/>
-								<Text text="{PaymentTerm}"/>
+								<Text text="{PaymentTerms}"/>
 							</cells>
 						</ColumnListItem>	
 					</items>
@@ -49,22 +49,20 @@
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar width="100%">
+				<OverflowToolbar width="100%" class="margin-bottom">
 					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Text class="black" text=""/>
+				<Label class="black" text="{i18n>durationOnDays}:" width="200px"/>
+				<Label class="black" text="{DurationOnDays}"/>
 				<ToolbarSpacer/>
-				<Text class="black" text="{i18n>durationOnDays}:" width="200px"/>
-				<Text class="black" text="{DurationOnDays}"/>
+				<Label class="black" text="{i18n>tonnage}:" width="200px"/>
+				<Label class="black" text="{Tonnage}"/>
 				<ToolbarSpacer/>
-				<Text class="black" text="{i18n>tonnage}:" width="200px"/>
-				<Text class="black" text="{Tonnage}"/>
+				<Label class="black" text="{i18n>paymentMethod}:" width="200px"/>
+				<Label class="black" text="{PaymentMethod}"/>
 				<ToolbarSpacer/>
-				<Text class="black" text="{i18n>paymentMethod}:" width="200px"/>
-				<Text class="black" text="{PaymentMethod}"/>
-				<ToolbarSpacer/>
-				<Text class="black" text="{i18n>paymentTerms}:" width="200px"/>
-				<Text class="black" text="{PaymentTerms}"/>
+				<Label class="black" text="{i18n>paymentTerms}:" width="200px"/>
+				<Label class="black" text="{PaymentTerms}"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>

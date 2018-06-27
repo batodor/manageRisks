@@ -39,7 +39,8 @@ table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
 	color: #fff;
 }
 
-.sapUiTheme-utistheme1 .sapUiBlockLayoutSizeM .sapUiBlockCellContent{
+.sapUiTheme-utistheme1 .sapUiBlockLayoutSizeM .sapUiBlockCellContent,
+.sapUiTheme-utistheme1 .sapUiBlockLayoutSizeL .sapUiBlockCellContent{
 	padding: 1rem !important;
 }
 

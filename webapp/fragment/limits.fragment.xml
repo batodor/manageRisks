@@ -37,7 +37,7 @@
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Text text="{Тonnage}"/>
+								<Text text="{Tonnage}"/>
 								<Text text="{Period}"/>
 								<Text text="{PaymentMethod}"/>
 								<Text text="{PaymentTerms}"/>

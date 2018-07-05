@@ -127,11 +127,23 @@ sap.ui.define([
 						this.bindTable("risksCountryTable", sObjectPath + "/ToRisksCountry");
 					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
-						this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
+						this.byId("ratingElement").bindElement({
+							path: sObjectPath + "/ToCounterpartyRating",
+							events : {
+								dataReceived : this.loadCurrentLimits.bind(this)
+							}
+						});
+						//this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
 						this.bindElement("propertiesOfDeal", sObjectPath + "/ToPropertiesOfDeal", true);
-						this.bindTable("limitsTable", sObjectPath + "/ToCounterpartyRating/ToLimitsRating");
+						//this.bindTable("limitsTable", sObjectPath + "/ToCounterpartyRating/ToLimitsRating");
 					}
 				}.bind(this));
+			},
+			
+			// Load current limits after counterparty rating loaded(ratingElement)
+			loadCurrentLimits: function(oEvent){
+				var url = oEvent.getSource().oElementContext.getPath();
+				this.bindTable("limitsTable", url + "/ToLimitsRating");
 			},
 			
 			// Bind table function for all tables

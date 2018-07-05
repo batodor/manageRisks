@@ -128,7 +128,7 @@ sap.ui.define([
 					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
 						this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
-						//this.bindTable("limits1Table", sObjectPath + "/ToRisksCounterparty");
+						this.bindElement("propertiesOfDeal", sObjectPath + "/ToPropertiesOfDeal", true);
 						//this.bindTable("limits2Table", sObjectPath + "/ToRisksCountry");
 					}
 					

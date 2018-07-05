@@ -1,21 +1,21 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<l:BlockLayout id="limitsFragment" visible="false">
-		<l:BlockLayoutRow id="ratingElement">
-			<l:BlockLayoutCell width="2">
-				<Label class="black" text="{i18n>counterparty}:" width="240px"/>
+		<l:BlockLayoutRow >
+			<l:BlockLayoutCell width="2" id="ratingElement">
+				<Label class="black" text="{i18n>counterparty}:" width="200px"/>
 				<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rating}:" width="240px"/>
+				<Label class="black" text="{i18n>rating}:" width="200px"/>
 				<Label text="{Rating}"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>updateDate}:" width="240px"/>
+				<Label class="black" text="{i18n>updateDate}:" width="200px"/>
 				<Label text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
+				<Label class="black" text="{i18n>expressScore}:" width="200px"/>
 				<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
-		<l:BlockLayoutRow>
+		<l:BlockLayoutRow >
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>currentLimits}" id="limits1Title" titleStyle="H3"/>
@@ -48,26 +48,25 @@
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>
-			<l:BlockLayoutCell>
+			<l:BlockLayoutCell id="propertiesOfDeal">
 				<OverflowToolbar width="100%" class="margin-bottom">
 					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label class="black" text="{i18n>durationOnDays}:" width="200px"/>
-				<Label class="black" text="{DurationOnDays}"/>
+				<Label text="{DurationDays}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>tonnage}:" width="200px"/>
-				<Label class="black" text="{Tonnage}"/>
+				<Label text="{Tonnage} {TonnageUoM}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="200px"/>
-				<Label class="black" text="{PaymentMethod}"/>
+				<Label text="{PaymMethod}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="200px"/>
-				<Label class="black" text="{PaymentTerms}"/>
-			</l:BlockLayoutCell>
-		</l:BlockLayoutRow>
-		<l:BlockLayoutRow>
-			<l:BlockLayoutCell width="2">
-				<CheckBox id="withMembers" text="{i18n>withMembers}" />
+				<Label text="{TermsSales}"/>
+				<ToolbarSpacer/>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<CheckBox id="withMembers" text="{i18n>withMembers} {SupervisOrgan}" />
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>

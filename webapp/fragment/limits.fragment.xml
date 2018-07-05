@@ -59,7 +59,7 @@
 				<Label text="{Tonnage} {TonnageUoM}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="200px"/>
-				<Label text="{PaymMethod}"/>
+				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="200px"/>
 				<Label text="{TermsSales}"/>

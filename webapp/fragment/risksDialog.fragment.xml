@@ -3,16 +3,16 @@
 		<content>
 			<Text text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="300px"/>
-			<Select selectedKey="{Counterparty}" custom:key="counterparty" forceSelection="false" id="risksAddContent" 
-				items="{ path: '/dictionaryCounterpartySet', sorter: { path: 'CounterpartyName' } }" width="300px">
-				<core:Item key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
-			</Select>
+			<!--<Select selectedKey="{Counterparty}" custom:key="counterparty" forceSelection="false" id="risksAddContent" -->
+			<!--	items="{ path: '/dictionaryCounterpartySet', sorter: { path: 'CounterpartyName' } }" width="300px">-->
+			<!--	<core:Item key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>-->
+			<!--</Select>-->
 			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Select selectedKey="{RiskType}" custom:key="riskType" forceSelection="false"
-				items="{ path: '/dictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
-				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeDescr}"/>
-			</Select>
+			<!--<Select selectedKey="{RiskType}" custom:key="riskType" forceSelection="false"-->
+			<!--	items="{ path: '/dictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">-->
+			<!--	<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeDescr}"/>-->
+			<!--</Select>-->
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
 			<DatePicker dateValue="{DateFrom}" custom:key="dateFrom" width="300px"/>

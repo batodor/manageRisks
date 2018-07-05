@@ -129,10 +129,8 @@ sap.ui.define([
 						limits.setVisible(true);
 						this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
 						this.bindElement("propertiesOfDeal", sObjectPath + "/ToPropertiesOfDeal", true);
-						//this.bindTable("limits2Table", sObjectPath + "/ToRisksCountry");
+						this.bindTable("limitsTable", sObjectPath + "/ToCounterpartyRating/ToLimitsRating");
 					}
-					
-					
 				}.bind(this));
 			},
 			

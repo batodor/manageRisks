@@ -18,11 +18,11 @@
 		<l:BlockLayoutRow >
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="100%">
-					<Title text="{i18n>currentLimits}" id="limits1Title" titleStyle="H3"/>
+					<Title text="{i18n>currentLimits}" id="limitsTitle" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Table
-					id="limits1Table"
-					custom:id="limits1"
+					id="limitsTable"
+					custom:id="limits"
 					width="100%"
 					items="{}"
 					updateFinished="onUpdateFinished"

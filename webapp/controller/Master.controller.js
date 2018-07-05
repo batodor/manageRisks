@@ -99,7 +99,7 @@ sap.ui.define([
 				this._updateListItemCount(oEvent.getParameter("total"));
 				// hide pull to refresh if necessary
 				this.byId("pullToRefresh").hide();
-				this.getCount();
+				//this.getCount();
 			},
 
 			/**
@@ -227,11 +227,13 @@ sap.ui.define([
 			_onMasterMatched :  function(oEvent) {
 				var type = oEvent.getParameter("arguments").ItemType;
 				var that = this; 
-				this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
-				this._oList.attachEventOnce("updateFinished", function(){
-					that._applyFilterSearch();
-				});
-				this.getCount();
+				if(type){
+					this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
+					this._oList.attachEventOnce("updateFinished", function(){
+						that._applyFilterSearch();
+					});
+				}
+				//this.getCount();
 			},
 			
 			_onObjectMatched : function (oEvent) {

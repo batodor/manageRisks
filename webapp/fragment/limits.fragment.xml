@@ -50,22 +50,22 @@
 				<OverflowToolbar width="100%" class="margin-bottom">
 					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Label class="black" text="{i18n>durationOnDays}:" width="200px"/>
-				<Label text="{DurationDays}" width="200px" />
-				<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="200px"/>
-				<Label text="{WarningPeriod}" width="200px" />
+				<Label class="black" text="{i18n>durationOnDays}:" width="150px"/>
+				<Label text="{DurationDays}" width="150px" />
+				<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="150px"/>
+				<Label text="{WarningPeriod}" width="350px" />
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>tonnage}:" width="200px"/>
-				<Label text="{Tonnage} {TonnageUoM}" width="200px"/>
-				<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="200px"/>
-				<Label text="{WarningTonnage}" width="200px" />
+				<Label class="black" text="{i18n>tonnage}:" width="150px"/>
+				<Label text="{Tonnage} {TonnageUoM}" width="150px"/>
+				<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="150px"/>
+				<Label text="{WarningTonnage}" width="350px" />
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>paymentMethod}:" width="200px"/>
-				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}" width="200px"/>
-				<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="200px"/>
-				<Label text="{WarningPayment}" width="200px" />
+				<Label class="black" text="{i18n>paymentMethod}:" width="150px"/>
+				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}" width="150px"/>
+				<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="150px"/>
+				<Label text="{WarningPayment}" width="350px" />
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>paymentTerms}:" width="200px"/>
+				<Label class="black" text="{i18n>paymentTerms}:" width="150px"/>
 				<Label text="{TermsSales}"/>
 				<ToolbarSpacer/>
 				<Label text=""/>

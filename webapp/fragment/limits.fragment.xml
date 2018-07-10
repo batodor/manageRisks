@@ -29,18 +29,16 @@
 					noDataText="{i18n>detailLineItemTableNoDataText}"
 					busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 					<columns>
-						<Column hAlign="Center"><Text class="black" text="{i18n>tonnage}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>period}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>paymentMethod}"/></Column>
-						<Column hAlign="Center"><Text class="black" text="{i18n>paymentTerms}"/></Column>
+						<Column hAlign="Center" width="20%"><Text class="black" text="{i18n>tonnage}"/></Column>
+						<Column hAlign="Center" width="20%"><Text class="black" text="{i18n>period}"/></Column>
+						<Column hAlign="Center" width="60%"><Text class="black" text="{i18n>paymentCondition}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
 							<cells>
 								<Text text="{Tonnage}"/>
-								<Text text="{Period}"/>
-								<Text text="{PaymentMethod}"/>
-								<Text text="{PaymentTerms}"/>
+								<Text text="{Period} {PeriodUoM}"/>
+								<Text text="{PaymentCondition}"/>
 							</cells>
 						</ColumnListItem>	
 					</items>
@@ -53,13 +51,19 @@
 					<Title text="{i18n>propertiesOfDeal}" id="limits2Title" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label class="black" text="{i18n>durationOnDays}:" width="200px"/>
-				<Label text="{DurationDays}"/>
+				<Label text="{DurationDays}" width="200px" />
+				<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="200px"/>
+				<Label text="{WarningPeriod}" width="200px" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>tonnage}:" width="200px"/>
-				<Label text="{Tonnage} {TonnageUoM}"/>
+				<Label text="{Tonnage} {TonnageUoM}" width="200px"/>
+				<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="200px"/>
+				<Label text="{WarningTonnage}" width="200px" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="200px"/>
-				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}"/>
+				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}" width="200px"/>
+				<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="200px"/>
+				<Label text="{WarningPayment}" width="200px" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="200px"/>
 				<Label text="{TermsSales}"/>

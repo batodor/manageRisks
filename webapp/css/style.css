@@ -5,7 +5,8 @@
 	color: black;
 }
 .red.sapMLabel{
-	color: red !important;
+	color: #fa8585 !important;
+	font-weight: bold;
 }
 div[id*="ratingElement"] .sapMCbBg{
 	left:0;

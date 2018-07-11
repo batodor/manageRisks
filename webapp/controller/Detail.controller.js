@@ -142,15 +142,18 @@ sap.ui.define([
 			
 			// Load current limits after counterparty rating loaded(ratingElement)
 			loadCurrentLimits: function(oEvent){
-				var url = oEvent.getSource().oElementContext.getPath();
-				this.bindTable("limitsTable", url + "/ToLimitsRating");
+				var url = "/CounterpartyRatingSet(TCNumber='',Counterparty='',DateFrom=datetime'')";
+				if(oEvent.getSource().oElementContext){
+					url = oEvent.getSource().oElementContext.getPath();
+				}
+				this.bindTable("limitsTable", url + "/ToLimitsRating", true);
 			},
 			
 			// Bind table function for all tables
 			// tableId = id of table, url = full path of binding
-			bindTable: function(id, url){
+			bindTable: function(id, url, update){
 				var oTable = this.byId(id, url);
-				if(oTable["mBindingInfos"].items.path !== url){
+				if(oTable["mBindingInfos"].items.path !== url || update){
 					oTable.bindItems({
 						path: url,
 						template: oTable['mBindingInfos'].items.template
@@ -420,7 +423,7 @@ sap.ui.define([
 					for(var j in this.typeArr){
 						var type = this.typeArr[j];
 						var input = inputs[i];
-						if(input["mBindingInfos"].hasOwnProperty(type)){
+						if(input["mBindingInfos"].hasOwnProperty(type) && !input.data("disabled")){
 							if(input.data("key")){
 								input.setEnabled(flag);
 							}else{
@@ -438,7 +441,7 @@ sap.ui.define([
 				var inputs = dialog.getAggregation("content");
 				for(var i in inputs){
 					var oInput = inputs[i];
-					if(oInput.data("key")){
+					if(oInput.data("key") && !oInput.data("checkOmit")){
 						if((oInput["mProperties"].hasOwnProperty("value") && !oInput.getValue()) || 
 						(oInput["mProperties"].hasOwnProperty("selectedKey") && !oInput.getSelectedKey()) ||
 						(oInput["mProperties"].hasOwnProperty("value") && !oInput.getValue()) ||

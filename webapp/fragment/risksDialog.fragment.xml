@@ -3,12 +3,12 @@
 		<content>
 			<Text text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="300px"/>
-			<Select selectedKey="{Counterparty}" custom:key="counterparty" forceSelection="false" id="risksAddContent" width="300px">
+			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" forceSelection="false" id="risksAddContent" width="300px">
 				<core:Item key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Select selectedKey="{RiskType}" custom:key="riskType" forceSelection="false" width="300px">
+			<Select selectedKey="{RiskType}" custom:key="riskType" custom:checkOmit="true" forceSelection="false" width="300px">
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeDescr}"/>
 			</Select>
 			<ToolbarSpacer/>
@@ -25,7 +25,7 @@
 			<TextArea value="{Actions}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>agreement}" width="150px"/>
-			<TextArea value="{Agreement}" width="300px" custom:key="agreement" />
+			<TextArea value="{Agreement}" enabled="false" width="300px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>commentOfLawyer}" width="150px"/>
 			<TextArea value="{LawyerComment}" width="300px"/>

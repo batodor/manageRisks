@@ -16,6 +16,19 @@ sap.ui.define([
 				}
 
 				return parseFloat(sValue).toFixed(2);
+			},
+			
+			brakeLine : function(value) {
+				if (!value) {
+					return "";
+				}
+				var valueArr = value.split(';');
+				var newValue = '';
+				for(var i = 0; i < valueArr.length; i++){
+					newValue = newValue + valueArr[i] + '\n';
+				}
+				newValue.slice(0, -2);
+				return newValue;
 			}
 		};
 

@@ -4,6 +4,9 @@
 .black.sapMLabel{
 	color: black;
 }
+.red.sapMLabel{
+	color: red;
+}
 div[id*="ratingElement"] .sapMCbBg{
 	left:0;
 	top:0;

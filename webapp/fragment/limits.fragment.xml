@@ -38,7 +38,7 @@
 							<cells>
 								<Text text="{Tonnage}"/>
 								<Text text="{Period} {PeriodUoM}"/>
-								<Text text="{PaymentCondition}"/>
+								<Text text="{ path: 'PaymentCondition', formatter: '.formatter.brakeLine' }"/>
 							</cells>
 						</ColumnListItem>	
 					</items>
@@ -52,18 +52,18 @@
 				</OverflowToolbar>
 				<Label class="black" text="{i18n>durationOnDays}:" width="150px"/>
 				<Label text="{DurationDays}" width="150px" />
-				<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="150px"/>
-				<Label text="{WarningPeriod}" width="350px" />
+				<!--<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="150px"/>-->
+				<Label class="red" text="{WarningPeriod}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>tonnage}:" width="150px"/>
 				<Label text="{Tonnage} {TonnageUoM}" width="150px"/>
-				<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="150px"/>
-				<Label text="{WarningTonnage}" width="350px" />
+				<!--<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="150px"/>-->
+				<Label class="red" text="{WarningTonnage}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="150px"/>
 				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}" width="150px"/>
-				<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="150px"/>
-				<Label text="{WarningPayment}" width="350px" />
+				<!--<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="150px"/>-->
+				<Label class="red" text="{WarningPayment}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="150px"/>
 				<Label text="{TermsSales}"/>

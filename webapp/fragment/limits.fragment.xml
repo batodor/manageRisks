@@ -38,7 +38,7 @@
 							<cells>
 								<Text text="{Tonnage}"/>
 								<Text text="{Period} {PeriodUoM}"/>
-								<Text text="{ path: 'PaymentCondition', formatter: '.formatter.brakeLine' }"/>
+								<Text text="{PaymentCondition}"/>
 							</cells>
 						</ColumnListItem>	
 					</items>

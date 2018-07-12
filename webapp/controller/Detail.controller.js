@@ -117,32 +117,32 @@ sap.ui.define([
 				this.byId("openDeal").setEnabled(true);
 				
 				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("/DealSet", {
+					this.objectPath = this.getModel().createKey("/DealSet", {
 						TCNumber : this.TCNumber,
 						ItemType : this.ItemType
 					});
 					if(this.ItemType === "R"){
 						risks.setVisible(true);
-						this.bindTable("risksTable", sObjectPath + "/ToRisksCounterparty");
-						this.bindTable("risksCountryTable", sObjectPath + "/ToRisksCountry");
+						this.bindTable("risksTable", this.objectPath + "/ToRisksCounterparty");
+						this.bindTable("risksCountryTable", this.objectPath + "/ToRisksCountry");
 					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
 						this.byId("ratingElement").bindElement({
-							path: sObjectPath + "/ToCounterpartyRating",
+							path: this.objectPath + "/ToCounterpartyRating",
 							events : {
 								dataReceived : this.loadCurrentLimits.bind(this)
 							}
 						});
-						//this.bindElement("ratingElement", sObjectPath + "/ToCounterpartyRating", true);
-						this.bindElement("propertiesOfDeal", sObjectPath + "/ToPropertiesOfDeal", true);
-						//this.bindTable("limitsTable", sObjectPath + "/ToCounterpartyRating/ToLimitsRating");
+						//this.bindElement("ratingElement", this.objectPath + "/ToCounterpartyRating", true);
+						this.bindElement("propertiesOfDeal", this.objectPath + "/ToPropertiesOfDeal", true);
+						//this.bindTable("limitsTable", this.objectPath + "/ToCounterpartyRating/ToLimitsRating");
 					}
 				}.bind(this));
 			},
 			
 			// Load current limits after counterparty rating loaded(ratingElement)
 			loadCurrentLimits: function(oEvent){
-				var url = "/CounterpartyRatingSet(TCNumber='',Counterparty='',DateFrom=datetime'')";
+				var url = this.objectPath + "/CounterpartyRatingSet(TCNumber='',Counterparty='',DateFrom=datetime'')";
 				if(oEvent.getSource().oElementContext){
 					url = oEvent.getSource().oElementContext.getPath();
 				}
@@ -265,7 +265,11 @@ sap.ui.define([
 				dialog.unbindElement();
 				this.setEnabledDialog(dialog, true);
 				sap.ui.getCore().byId(id + "EditContent").setVisible(false);
-				sap.ui.getCore().byId(id + "AddContent").setVisible(true);
+				var select = sap.ui.getCore().byId(id + "AddContent");
+				select.setVisible(true).bindItems({
+					path: this.objectPath + "/ToCounterpartyByDeal",
+					template: select['mBindingInfos'].items.template
+				});
 				var buttons = dialog.getButtons();
 				buttons[1].setVisible(true);
 				buttons[2].setVisible(false);

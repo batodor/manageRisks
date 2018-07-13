@@ -3,14 +3,15 @@
 		<content>
 			<Text text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="350px"/>
-			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" items="{}" forceSelection="false" id="risksAddContent" width="350px">
-				<core:Item key="{Partner}" text="{Partner} - {Counterparty}"/>
+			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" items="{}"
+				forceSelection="false" id="risksAddContent" width="350px">
+				<core:Item key="{Code}" text="{Code} - {Name}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>riskType}" width="150px"/>
-			<Select selectedKey="{RiskType}" custom:key="riskType" custom:checkOmit="true" forceSelection="false" items="{ path: '/RiskTypesSet', sorter: { path: 'RiskType' } }" 
+			<Select selectedKey="{RiskType}" custom:key="riskType" custom:checkOmit="true" forceSelection="false" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'Code' } }" 
 				width="350px">
-				<core:Item key="{RiskType}" text="{RiskType} - {Description}"/>
+				<core:Item key="{Code}" text="{Code} - {Name}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="150px"/>
@@ -37,9 +38,9 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogCancel"/>
-			<Button text="{i18n>add}" custom:id="risks" visible="false" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>add}" custom:id="risks" custom:url="RisksByCounterparty" visible="false" type="Accept" press="dialogAdd"/>
 			<Button text="{i18n>edit}" custom:id="risks" visible="false" type="Default" press="dialogEdit"/>
-			<Button text="{i18n>save}" custom:id="risks" visible="false" type="Accept" press="dialogSave"/>
+			<Button text="{i18n>save}" custom:id="risks" custom:url="RisksByCounterparty" visible="false" type="Accept" press="dialogSave"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

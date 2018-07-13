@@ -26,7 +26,7 @@
 		<semantic:customFooterContent>
 			<Button enabled="false" press="openDeal" id="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 			<ToolbarSpacer />
-			<Button press="save" type="Ghost" text="{i18n>save}" />
+			<!--<Button press="save" text="{i18n>save}" />-->
 			<Button press="approve" type="Accept" text="{i18n>approve}" />
 		</semantic:customFooterContent>
 		

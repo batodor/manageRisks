@@ -4,8 +4,10 @@ sap.ui.define([
 		"sap/ui/model/json/JSONModel",
 		"managerisks/model/formatter",
 		'sap/m/MessageToast',
-		'sap/m/MessageBox'
-	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
+		'sap/m/MessageBox',
+		"sap/ui/model/Filter",
+		"sap/ui/model/FilterOperator"
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox, Filter, FilterOperator) {
 		"use strict";
 
 		return BaseController.extend("managerisks.controller.Detail", {
@@ -229,26 +231,27 @@ sap.ui.define([
 			},
 			
 			approve: function(){
-				if(this.ItemType === "R"){
-					var oFuncParams = { 
-						TCNumber: this.TCNumber
-					};
-					this.getModel().callFunction("/ApproveRisks", {
-						method: "POST",
-						urlParameters: oFuncParams,
-						success: this.onRisksApproveSuccess.bind(this)
-					});
-				}else{
-					MessageToast.show("Limits will work tommorow!");
+				var link = this.ItemType === "R" ? 'ApproveRisks' : 'ApproveLimits';
+				var oFuncParams = { 
+					TCNumber: this.TCNumber
+				};
+				if(this.ItemType === "L"){
+					var approveCheckbox = this.byId("withMembers") || sap.ui.getCore().byId("withMembers");
+					oFuncParams.IsApproved = approveCheckbox.getSelected();
 				}
+				this.getModel().callFunction("/" + link, {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onApproveSuccess.bind(this, link)
+				});
 			},
 			
 			openDeal: function(){
 				window.open("https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 			},
 			
-			onRisksApproveSuccess: function(oData, response) {
-				var oResult = oData.ApproveRisks;
+			onApproveSuccess: function(link, oData) {
+				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
 					MessageToast.show(oResult.Message);
 					var eventBus = sap.ui.getCore().getEventBus();
@@ -266,9 +269,11 @@ sap.ui.define([
 				this.setEnabledDialog(dialog, true);
 				sap.ui.getCore().byId(id + "EditContent").setVisible(false);
 				var select = sap.ui.getCore().byId(id + "AddContent");
+				var filters = [new Filter("TCNumber", FilterOperator.EQ, this.TCNumber)];
 				select.setVisible(true).bindItems({
-					path: this.objectPath + "/ToCounterpartyByDeal",
-					template: select['mBindingInfos'].items.template
+					path: "/DictionaryCounterpartyDealSet",
+					template: select['mBindingInfos'].items.template,
+					filters: filters
 				});
 				var buttons = dialog.getButtons();
 				buttons[1].setVisible(true);
@@ -325,14 +330,16 @@ sap.ui.define([
 			},
 			dialogAdd: function(oEvent) {
 				var button = oEvent.getSource();
-				var tableId = button.data("id");
 				var dialog = button.getParent();
+				var id =  button.data("id");
+				var url = button.data("url") ? "/" + button.data("url") + "Set" : "/" + id + "Set";
 				var oModel = dialog.getModel();
 				var oData = this.getOdata(dialog);
+				oData.TCNumber = this.TCNumber;
 				var bCheckAlert = this.checkKeys(dialog);
 				if(bCheckAlert === "Please, enter"){
-					oModel.create("/" + tableId + "Set", oData);
-					this[tableId + "Dialog"].close();
+					oModel.create(url, oData);
+					dialog.close();
 				}else{
 					MessageBox.alert(bCheckAlert.slice(0, -2), {
 						actions: [sap.m.MessageBox.Action.CLOSE]

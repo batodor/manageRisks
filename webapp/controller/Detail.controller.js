@@ -354,8 +354,10 @@ sap.ui.define([
 				var modelData = dialog.getModel().getData(url);
 				var changedData = this.compareDatas(inputData, modelData);
 				dialog.unbindElement();
-				dialog.getModel().update(url, changedData);
-				this.dialogClose(oEvent);
+				if(Object.keys(changedData).length > 0){
+					dialog.getModel().update(url, changedData);
+				}
+				dialog.close();
 			},
 			dialogEdit: function(oEvent){
 				var button = oEvent.getSource();

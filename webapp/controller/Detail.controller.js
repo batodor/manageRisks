@@ -235,10 +235,20 @@ sap.ui.define([
 				var oFuncParams = { 
 					TCNumber: this.TCNumber
 				};
+				var mailLink = "mailto:";
+				var mailAddress = "test@gmail.com";
+				var mailSubject = "?subject=Risks by Deal № " + this.TCNumber + " are updated";
+				var mailContent = "&body=Risks by Deal № " + this.TCNumber + " are eliminated. %0D%0A" +
+					"Deal: https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber;
 				if(this.ItemType === "L"){
 					var approveCheckbox = this.byId("withMembers") || sap.ui.getCore().byId("withMembers");
 					oFuncParams.IsApproved = approveCheckbox.getSelected();
+					mailSubject = "?subject=Exceeding the limits by Deal № " + this.TCNumber + " are approved with Supervisory Organization";
+					mailContent = "&body=Exceeding the limits by Deal № " + this.TCNumber + " are approved with Supervisory Organization.%0D%0A" +
+					"Deal: https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber;
 				}
+				var fullMailLink = mailLink + mailAddress + mailSubject + mailContent;
+				//window.open(fullMailLink);
 				this.getModel().callFunction("/" + link, {
 					method: "POST",
 					urlParameters: oFuncParams,

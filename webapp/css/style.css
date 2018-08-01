@@ -29,6 +29,9 @@ table[id*="risksCountryTable"] .sapMCbBg.sapMCbMarkChecked:before {
 .margin-bottom{
 	margin-bottom: 1rem;
 }
+.sapUshellShell .sapMPageBgStandard{
+	background-color:transparent;
+}
 
 /* ---- UTIS SUEK THEME ---- */
 .sapUiTheme-utistheme1 .sapMInputDivWrapper{

@@ -1,190 +1,201 @@
-<edmx:Edmx
-    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
-    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
-    <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema
-            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTS_LAWYER_APP_SRV" xml:lang="ru" sap:schema-version="1">
-            <EntityType Name="RisksByCounterparty" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                    <PropertyRef Name="Counterparty"/>
-                    <PropertyRef Name="RiskType"/>
-                    <PropertyRef Name="RiskItem"/>
-                    <PropertyRef Name="DateFrom"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Counterparty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RiskItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateTo" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CounterpartyName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RiskTypeDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Actions" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Agreement" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="LawyerComment" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Eliminated" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="LastChanged" Type="Edm.DateTimeOffset" Nullable="false" Precision="0" ConcurrencyMode="Fixed" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="Deal" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                    <PropertyRef Name="ItemType"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ItemType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TraderName" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToRisksCounterparty" Relationship="ZTS_LAWYER_APP_SRV.DealToRisksByCounterparty" FromRole="FromRole_DealToRisksByCounterparty" ToRole="ToRole_DealToRisksByCounterparty"/>
-                <NavigationProperty Name="ToRisksCountry" Relationship="ZTS_LAWYER_APP_SRV.DealToRisksByCountry" FromRole="FromRole_DealToRisksByCountry" ToRole="ToRole_DealToRisksByCountry"/>
-                <NavigationProperty Name="ToCounterpartyRating" Relationship="ZTS_LAWYER_APP_SRV.DealToCounterpartyRating" FromRole="FromRole_DealToCounterpartyRating" ToRole="ToRole_DealToCounterpartyRating"/>
-                <NavigationProperty Name="ToPropertiesOfDeal" Relationship="ZTS_LAWYER_APP_SRV.DealToPropertiesOfDeal" FromRole="FromRole_DealToPropertiesOfDeal" ToRole="ToRole_DealToPropertiesOfDeal"/>
-            </EntityType>
-            <EntityType Name="RisksByCountry" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                    <PropertyRef Name="CountryKey"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CountryKey" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sanctions" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="CounterpartyRating" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                    <PropertyRef Name="Counterparty"/>
-                    <PropertyRef Name="DateFrom"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Counterparty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CounterpartyName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Rating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ExpressScore" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToLimitsRating" Relationship="ZTS_LAWYER_APP_SRV.CntrpartyRatingToLimitsRating" FromRole="FromRole_CntrpartyRatingToLimitsRating" ToRole="ToRole_CntrpartyRatingToLimitsRating"/>
-            </EntityType>
-            <EntityType Name="LimitsByRating" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="ItemNum"/>
-                </Key>
-                <Property Name="ItemNum" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Tonnage" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:unit="TonnageUoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TonnageUoM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="Period" Type="Edm.Decimal" Precision="4" Scale="0" sap:unicode="false" sap:unit="PeriodUoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PeriodUoM" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PaymentCondition" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="PropertiesOfDeal" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DurationDays" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Tonnage" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TonnageUoM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="PaymMethod" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PaymMethodDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TermsSales" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="SupervisOrgan" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="WarningTonnage" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="WarningPeriod" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="WarningPayment" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryCounterpartyDeal" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryRiskType" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-            </EntityType>
-            <ComplexType Name="ActionResult">
-                <Property Name="ActionSuccessful" Type="Edm.Boolean" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Message" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DealURL" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Recipient" Type="Edm.String" MaxLength="241" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </ComplexType>
-            <Association Name="CntrpartyRatingToLimitsRating" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.CounterpartyRating" Multiplicity="1" Role="FromRole_CntrpartyRatingToLimitsRating"/>
-                <End Type="ZTS_LAWYER_APP_SRV.LimitsByRating" Multiplicity="*" Role="ToRole_CntrpartyRatingToLimitsRating"/>
-            </Association>
-            <Association Name="DealToRisksByCountry" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToRisksByCountry"/>
-                <End Type="ZTS_LAWYER_APP_SRV.RisksByCountry" Multiplicity="*" Role="ToRole_DealToRisksByCountry"/>
-            </Association>
-            <Association Name="DealToCounterpartyRating" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToCounterpartyRating"/>
-                <End Type="ZTS_LAWYER_APP_SRV.CounterpartyRating" Multiplicity="1" Role="ToRole_DealToCounterpartyRating"/>
-            </Association>
-            <Association Name="DealToPropertiesOfDeal" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToPropertiesOfDeal"/>
-                <End Type="ZTS_LAWYER_APP_SRV.PropertiesOfDeal" Multiplicity="1" Role="ToRole_DealToPropertiesOfDeal"/>
-            </Association>
-            <Association Name="DealToCounterparty" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToCounterparty"/>
-                <End Type="ZTS_LAWYER_APP_SRV.DictionaryCounterpartyDeal" Multiplicity="*" Role="ToRole_DealToCounterparty"/>
-            </Association>
-            <Association Name="DealToRisksByCounterparty" sap:content-version="1">
-                <End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToRisksByCounterparty"/>
-                <End Type="ZTS_LAWYER_APP_SRV.RisksByCounterparty" Multiplicity="*" Role="ToRole_DealToRisksByCounterparty"/>
-            </Association>
-            <EntityContainer Name="ZTS_LAWYER_APP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                <EntitySet Name="RisksByCounterpartySet" EntityType="ZTS_LAWYER_APP_SRV.RisksByCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="DealSet" EntityType="ZTS_LAWYER_APP_SRV.Deal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="RisksByCountrySet" EntityType="ZTS_LAWYER_APP_SRV.RisksByCountry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyRatingSet" EntityType="ZTS_LAWYER_APP_SRV.CounterpartyRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="LimitsByRatingSet" EntityType="ZTS_LAWYER_APP_SRV.LimitsByRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="PropertiesOfDealSet" EntityType="ZTS_LAWYER_APP_SRV.PropertiesOfDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="DictionaryCounterpartyDealSet" EntityType="ZTS_LAWYER_APP_SRV.DictionaryCounterpartyDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="DictionaryRiskTypeSet" EntityType="ZTS_LAWYER_APP_SRV.DictionaryRiskType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <AssociationSet Name="CntrpartyRatingToLimitsRatingSet" Association="ZTS_LAWYER_APP_SRV.CntrpartyRatingToLimitsRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyRatingSet" Role="FromRole_CntrpartyRatingToLimitsRating"/>
-                    <End EntitySet="LimitsByRatingSet" Role="ToRole_CntrpartyRatingToLimitsRating"/>
-                </AssociationSet>
-                <AssociationSet Name="DealToPropertiesOfDealSet" Association="ZTS_LAWYER_APP_SRV.DealToPropertiesOfDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DealSet" Role="FromRole_DealToPropertiesOfDeal"/>
-                    <End EntitySet="PropertiesOfDealSet" Role="ToRole_DealToPropertiesOfDeal"/>
-                </AssociationSet>
-                <AssociationSet Name="DealToRisksByCountrySet" Association="ZTS_LAWYER_APP_SRV.DealToRisksByCountry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DealSet" Role="FromRole_DealToRisksByCountry"/>
-                    <End EntitySet="RisksByCountrySet" Role="ToRole_DealToRisksByCountry"/>
-                </AssociationSet>
-                <AssociationSet Name="DealToRisksByCounterpartySet" Association="ZTS_LAWYER_APP_SRV.DealToRisksByCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DealSet" Role="FromRole_DealToRisksByCounterparty"/>
-                    <End EntitySet="RisksByCounterpartySet" Role="ToRole_DealToRisksByCounterparty"/>
-                </AssociationSet>
-                <AssociationSet Name="DealToCounterpartyRatingSet" Association="ZTS_LAWYER_APP_SRV.DealToCounterpartyRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DealSet" Role="FromRole_DealToCounterpartyRating"/>
-                    <End EntitySet="CounterpartyRatingSet" Role="ToRole_DealToCounterpartyRating"/>
-                </AssociationSet>
-                <AssociationSet Name="DealToCounterparty_AssocSet" Association="ZTS_LAWYER_APP_SRV.DealToCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DealSet" Role="FromRole_DealToCounterparty"/>
-                    <End EntitySet="DictionaryCounterpartyDealSet" Role="ToRole_DealToCounterparty"/>
-                </AssociationSet>
-                <FunctionImport Name="ApproveRisks" ReturnType="ZTS_LAWYER_APP_SRV.ActionResult" m:HttpMethod="POST">
-                    <Parameter Name="TCNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
-                </FunctionImport>
-                <FunctionImport Name="ApproveLimits" ReturnType="ZTS_LAWYER_APP_SRV.ActionResult" m:HttpMethod="POST">
-                    <Parameter Name="TCNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="IsApproved" Type="Edm.Boolean" Mode="In"/>
-                </FunctionImport>
-            </EntityContainer>
-            <atom:link
-                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTS_LAWYER_APP_SRV/$metadata"/>
-                <atom:link
-                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTS_LAWYER_APP_SRV/$metadata"/>
-                </Schema>
-            </edmx:DataServices>
-        </edmx:Edmx>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTS_LAWYER_APP_SRV" xml:lang="en" sap:schema-version="1">
+<EntityType Name="RisksByCounterparty" sap:label="Risks by Counterparty" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+<PropertyRef Name="Counterparty"/>
+<PropertyRef Name="RiskType"/>
+<PropertyRef Name="RiskItem"/>
+<PropertyRef Name="DateFrom"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Counterparty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Counterparty Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiskItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Risk Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Date From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateTo" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CounterpartyName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Counterparty Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiskTypeDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Risk Type Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Actions" Type="Edm.String" sap:unicode="false" sap:label="Recommended Actions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Agreement" Type="Edm.String" sap:unicode="false" sap:label="Agreement with Counterparty" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="LawyerComment" Type="Edm.String" sap:unicode="false" sap:label="Comment from Lawyer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Eliminated" Type="Edm.Boolean" sap:unicode="false" sap:label="Eliminated" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="LastChanged" Type="Edm.DateTimeOffset" Nullable="false" Precision="0" ConcurrencyMode="Fixed" sap:unicode="false" sap:label="Last Changed" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="Deal" sap:label="Deal" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+<PropertyRef Name="ItemType"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ItemType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TraderName" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Trader Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ToRisksCounterparty" Relationship="ZTS_LAWYER_APP_SRV.DealToRisksByCounterparty" FromRole="FromRole_DealToRisksByCounterparty" ToRole="ToRole_DealToRisksByCounterparty"/>
+<NavigationProperty Name="ToRisksCountry" Relationship="ZTS_LAWYER_APP_SRV.DealToRisksByCountry" FromRole="FromRole_DealToRisksByCountry" ToRole="ToRole_DealToRisksByCountry"/>
+<NavigationProperty Name="ToCounterpartyRating" Relationship="ZTS_LAWYER_APP_SRV.DealToCounterpartyRating" FromRole="FromRole_DealToCounterpartyRating" ToRole="ToRole_DealToCounterpartyRating"/>
+<NavigationProperty Name="ToPropertiesOfDeal" Relationship="ZTS_LAWYER_APP_SRV.DealToPropertiesOfDeal" FromRole="FromRole_DealToPropertiesOfDeal" ToRole="ToRole_DealToPropertiesOfDeal"/>
+<NavigationProperty Name="ToUserFunction" Relationship="ZTS_LAWYER_APP_SRV.DealToUserFunction" FromRole="FromRole_DealToUserFunction" ToRole="ToRole_DealToUserFunction"/>
+</EntityType>
+<EntityType Name="RisksByCountry" sap:label="Risks by Country" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+<PropertyRef Name="CountryKey"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CountryKey" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sanctions" Type="Edm.Boolean" sap:unicode="false" sap:label="Sanctions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="CounterpartyRating" sap:label="Counterparty Rating" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+<PropertyRef Name="Counterparty"/>
+<PropertyRef Name="DateFrom"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Counterparty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Counterparty" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Date From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CounterpartyName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Counterparty Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Rating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Rating" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ExpressScore" Type="Edm.Boolean" sap:unicode="false" sap:label="Express Score" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ToLimitsRating" Relationship="ZTS_LAWYER_APP_SRV.CntrpartyRatingToLimitsRating" FromRole="FromRole_CntrpartyRatingToLimitsRating" ToRole="ToRole_CntrpartyRatingToLimitsRating"/>
+</EntityType>
+<EntityType Name="LimitsByRating" sap:label="Limits by Current Rating" sap:content-version="1">
+<Key>
+<PropertyRef Name="ItemNum"/>
+</Key>
+<Property Name="ItemNum" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:label="ItemNum" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Tonnage" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:unit="TonnageUoM" sap:label="Tonnage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TonnageUoM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Tonnage UoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+<Property Name="Period" Type="Edm.Decimal" Precision="4" Scale="0" sap:unicode="false" sap:unit="PeriodUoM" sap:label="Period" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PeriodUoM" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Period UoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PaymentCondition" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Payment Condition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="PropertiesOfDeal" sap:label="Properties of Deal" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DurationDays" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Max Duration" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Tonnage" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="Tonnage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TonnageUoM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Tonnage UOM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+<Property Name="PaymMethod" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Payment Method" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PaymMethodDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="PaymMethod Descript" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TermsSales" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="PaytTermsSls" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SupervisOrgan" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="SupervisOrganiz" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="WarningTonnage" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Warning Tonnage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="WarningPeriod" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Warning Period" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="WarningPayment" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Warning Payment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="DictionaryCounterpartyDeal" sap:content-version="1">
+<Key>
+<PropertyRef Name="TCNumber"/>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Trad. Contract" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="CounterpartyName" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+</EntityType>
+<EntityType Name="DictionaryRiskType" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+</EntityType>
+<EntityType Name="UserFunction" sap:content-version="1">
+<Key>
+<PropertyRef Name="UserName"/>
+</Key>
+<Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UserFunc" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="T: Trader L: Lawyer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<ComplexType Name="ActionResult">
+<Property Name="ActionSuccessful" Type="Edm.Boolean" sap:label="Action Successful" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Message" Type="Edm.String" sap:label="Message" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DealURL" Type="Edm.String" sap:label="Deal URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Recipient" Type="Edm.String" MaxLength="241" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" MaxLength="1" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</ComplexType>
+<Association Name="CntrpartyRatingToLimitsRating" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.CounterpartyRating" Multiplicity="1" Role="FromRole_CntrpartyRatingToLimitsRating"/>
+<End Type="ZTS_LAWYER_APP_SRV.LimitsByRating" Multiplicity="*" Role="ToRole_CntrpartyRatingToLimitsRating"/>
+</Association>
+<Association Name="DealToRisksByCountry" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToRisksByCountry"/>
+<End Type="ZTS_LAWYER_APP_SRV.RisksByCountry" Multiplicity="*" Role="ToRole_DealToRisksByCountry"/>
+</Association>
+<Association Name="DealToCounterpartyRating" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToCounterpartyRating"/>
+<End Type="ZTS_LAWYER_APP_SRV.CounterpartyRating" Multiplicity="1" Role="ToRole_DealToCounterpartyRating"/>
+</Association>
+<Association Name="DealToPropertiesOfDeal" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToPropertiesOfDeal"/>
+<End Type="ZTS_LAWYER_APP_SRV.PropertiesOfDeal" Multiplicity="1" Role="ToRole_DealToPropertiesOfDeal"/>
+</Association>
+<Association Name="DealToCounterparty" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToCounterparty"/>
+<End Type="ZTS_LAWYER_APP_SRV.DictionaryCounterpartyDeal" Multiplicity="*" Role="ToRole_DealToCounterparty"/>
+</Association>
+<Association Name="DealToUserFunction" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToUserFunction"/>
+<End Type="ZTS_LAWYER_APP_SRV.UserFunction" Multiplicity="1" Role="ToRole_DealToUserFunction"/>
+</Association>
+<Association Name="DealToRisksByCounterparty" sap:content-version="1">
+<End Type="ZTS_LAWYER_APP_SRV.Deal" Multiplicity="1" Role="FromRole_DealToRisksByCounterparty"/>
+<End Type="ZTS_LAWYER_APP_SRV.RisksByCounterparty" Multiplicity="*" Role="ToRole_DealToRisksByCounterparty"/>
+</Association>
+<EntityContainer Name="ZTS_LAWYER_APP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="RisksByCounterpartySet" EntityType="ZTS_LAWYER_APP_SRV.RisksByCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="DealSet" EntityType="ZTS_LAWYER_APP_SRV.Deal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="RisksByCountrySet" EntityType="ZTS_LAWYER_APP_SRV.RisksByCountry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="CounterpartyRatingSet" EntityType="ZTS_LAWYER_APP_SRV.CounterpartyRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="LimitsByRatingSet" EntityType="ZTS_LAWYER_APP_SRV.LimitsByRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="PropertiesOfDealSet" EntityType="ZTS_LAWYER_APP_SRV.PropertiesOfDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="DictionaryCounterpartyDealSet" EntityType="ZTS_LAWYER_APP_SRV.DictionaryCounterpartyDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="DictionaryRiskTypeSet" EntityType="ZTS_LAWYER_APP_SRV.DictionaryRiskType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="UserFunctionSet" EntityType="ZTS_LAWYER_APP_SRV.UserFunction" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<AssociationSet Name="DealToUserFunctionSet" Association="ZTS_LAWYER_APP_SRV.DealToUserFunction" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToUserFunction"/>
+<End EntitySet="UserFunctionSet" Role="ToRole_DealToUserFunction"/>
+</AssociationSet>
+<AssociationSet Name="CntrpartyRatingToLimitsRatingSet" Association="ZTS_LAWYER_APP_SRV.CntrpartyRatingToLimitsRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyRatingSet" Role="FromRole_CntrpartyRatingToLimitsRating"/>
+<End EntitySet="LimitsByRatingSet" Role="ToRole_CntrpartyRatingToLimitsRating"/>
+</AssociationSet>
+<AssociationSet Name="DealToPropertiesOfDealSet" Association="ZTS_LAWYER_APP_SRV.DealToPropertiesOfDeal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToPropertiesOfDeal"/>
+<End EntitySet="PropertiesOfDealSet" Role="ToRole_DealToPropertiesOfDeal"/>
+</AssociationSet>
+<AssociationSet Name="DealToRisksByCountrySet" Association="ZTS_LAWYER_APP_SRV.DealToRisksByCountry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToRisksByCountry"/>
+<End EntitySet="RisksByCountrySet" Role="ToRole_DealToRisksByCountry"/>
+</AssociationSet>
+<AssociationSet Name="DealToRisksByCounterpartySet" Association="ZTS_LAWYER_APP_SRV.DealToRisksByCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToRisksByCounterparty"/>
+<End EntitySet="RisksByCounterpartySet" Role="ToRole_DealToRisksByCounterparty"/>
+</AssociationSet>
+<AssociationSet Name="DealToCounterpartyRatingSet" Association="ZTS_LAWYER_APP_SRV.DealToCounterpartyRating" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToCounterpartyRating"/>
+<End EntitySet="CounterpartyRatingSet" Role="ToRole_DealToCounterpartyRating"/>
+</AssociationSet>
+<AssociationSet Name="DealToCounterparty_AssocSet" Association="ZTS_LAWYER_APP_SRV.DealToCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DealSet" Role="FromRole_DealToCounterparty"/>
+<End EntitySet="DictionaryCounterpartyDealSet" Role="ToRole_DealToCounterparty"/>
+</AssociationSet>
+<FunctionImport Name="ApproveRisks" ReturnType="ZTS_LAWYER_APP_SRV.ActionResult" m:HttpMethod="POST">
+<Parameter Name="TCNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
+</FunctionImport>
+<FunctionImport Name="ApproveLimits" ReturnType="ZTS_LAWYER_APP_SRV.ActionResult" m:HttpMethod="POST">
+<Parameter Name="TCNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
+<Parameter Name="IsApproved" Type="Edm.Boolean" Mode="In"/>
+</FunctionImport>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="https://ws-erd.corp.suek.ru/sap/opu/odata/sap/ZTS_LAWYER_APP_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="https://ws-erd.corp.suek.ru/sap/opu/odata/sap/ZTS_LAWYER_APP_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

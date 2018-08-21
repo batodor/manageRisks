@@ -21,19 +21,19 @@
 			<DatePicker dateValue="{DateTo}" custom:key="dateTo" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="150px"/>
-			<TextArea value="{Description}" width="350px" height="120px" />
+			<TextArea value="{Description}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>recommendedActions}" width="150px"/>
-			<TextArea value="{Actions}" width="350px" height="120px" />
+			<TextArea value="{Actions}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>agreement}" width="150px"/>
-			<TextArea value="{Agreement}" enabled="false" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
+			<TextArea value="{Agreement}" enabled="{= ${UserFunc} === 'L' ? false : true }" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>commentOfLawyer}" width="150px"/>
-			<TextArea value="{LawyerComment}" width="350px"/>
+			<TextArea value="{LawyerComment}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>eliminated}" width="150px"/>
-			<CheckBox selected="{Eliminated}" />
+			<CheckBox selected="{Eliminated}" enabled="{= ${UserFunc} === 'L' ? true : false }" />
 			<ToolbarSpacer/>
 		</content>
 		<buttons>

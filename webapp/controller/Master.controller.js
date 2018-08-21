@@ -256,9 +256,10 @@ sap.ui.define([
 			 */
 			_showDetail : function (oItem) {
 				var bReplace = !Device.system.phone;
+				var item = oItem.getBindingContext();
 				this.getRouter().navTo("object", {
-					TCNumber : oItem.getBindingContext().getProperty("TCNumber"),
-					ItemType: oItem.getBindingContext().getProperty("ItemType")
+					TCNumber : item.getProperty("TCNumber"),
+					ItemType: item.getProperty("ItemType")
 				}, bReplace);
 			},
 

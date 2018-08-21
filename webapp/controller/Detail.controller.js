@@ -119,10 +119,13 @@ sap.ui.define([
 				this.byId("openDeal").setEnabled(true);
 				
 				this.getModel().metadataLoaded().then( function() {
+					
 					this.objectPath = this.getModel().createKey("/DealSet", {
 						TCNumber : this.TCNumber,
 						ItemType : this.ItemType
 					});
+					this.byId("page").bindElement(this.objectPath + "/ToUserFunction");
+					
 					if(this.ItemType === "R"){
 						risks.setVisible(true);
 						this.bindTable("risksTable", this.objectPath + "/ToRisksCounterparty");
@@ -270,6 +273,7 @@ sap.ui.define([
 				var dialog = this[id + "Dialog"];
 				dialog.unbindElement();
 				this.setEnabledDialog(dialog, true);
+				dialog.bindElement(this.objectPath + "/ToUserFunction");
 				sap.ui.getCore().byId(id + "EditContent").setVisible(false);
 				var select = sap.ui.getCore().byId(id + "AddContent");
 				var filters = [new Filter("TCNumber", FilterOperator.EQ, this.TCNumber)];

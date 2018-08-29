@@ -1,44 +1,44 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog class="sapUiContentPadding" id="risksDialog">
 		<content>
-			<Text text="{i18n>counterparty}" width="150px"/>
+			<Label required="true" text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="350px"/>
 			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" items="{}"
 				forceSelection="false" id="risksAddContent" width="350px">
 				<core:Item key="{Code}" text="{Code} - {Name}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>riskType}" width="150px"/>
+			<Label required="true"  text="{i18n>riskType}" width="150px"/>
 			<Select selectedKey="{RiskType}" custom:key="riskType" custom:checkOmit="true" forceSelection="false" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'Code' } }" 
 				width="350px">
 				<core:Item key="{Code}" text="{Code} - {Name}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>dateFrom}" width="150px"/>
+			<Label required="true"  text="{i18n>dateFrom}" width="150px"/>
 			<DatePicker dateValue="{DateFrom}" custom:key="dateFrom" width="350px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>dateTo}" width="150px"/>
+			<Label required="true"  text="{i18n>dateTo}" width="150px"/>
 			<DatePicker dateValue="{DateTo}" custom:key="dateTo" width="350px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>description}" width="150px"/>
+			<Label text="{i18n>description}" width="150px"/>
 			<TextArea value="{Description}" id="riskDescription" width="350px" height="120px" />
 			<ToolbarSpacer/>
-			<Text text="{i18n>recommendedActions}" width="150px"/>
+			<Label text="{i18n>recommendedActions}" width="150px"/>
 			<TextArea value="{Actions}" id="riskActions" width="350px" height="120px" />
 			<ToolbarSpacer/>
-			<Text text="{i18n>agreement}" width="150px"/>
+			<Label text="{i18n>agreement}" width="150px"/>
 			<TextArea value="{Agreement}" id="riskAgreement" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
 			<ToolbarSpacer/>
-			<Text text="{i18n>commentOfLawyer}" width="150px"/>
+			<Label text="{i18n>commentOfLawyer}" width="150px"/>
 			<TextArea value="{LawyerComment}" id="riskLawyerComment" width="350px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>eliminated}" width="150px"/>
+			<Label text="{i18n>eliminated}" width="150px"/>
 			<CheckBox selected="{Eliminated}" id="riskEliminated"  />
 			<ToolbarSpacer/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogCancel"/>
-			<Button text="{i18n>add}" custom:id="risks" custom:url="ToRisksCounterparty" visible="false" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>add}" custom:id="risks" custom:url="RisksByCounterpartySet" visible="false" type="Accept" press="dialogAdd"/>
 			<Button text="{i18n>edit}" custom:id="risks" visible="false" type="Default" press="dialogEdit"/>
 			<Button text="{i18n>save}" custom:id="risks" custom:url="ToRisksCounterparty" visible="false" type="Accept" press="dialogSave"/>
 		</buttons>

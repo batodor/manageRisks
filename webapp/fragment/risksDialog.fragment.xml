@@ -21,26 +21,26 @@
 			<DatePicker dateValue="{DateTo}" custom:key="dateTo" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="150px"/>
-			<TextArea value="{Description}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px" height="120px" />
+			<TextArea value="{Description}" id="riskDescription" width="350px" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>recommendedActions}" width="150px"/>
-			<TextArea value="{Actions}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px" height="120px" />
+			<TextArea value="{Actions}" id="riskActions" width="350px" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>agreement}" width="150px"/>
-			<TextArea value="{Agreement}" enabled="{= ${UserFunc} === 'L' ? false : true }" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
+			<TextArea value="{Agreement}" id="riskAgreement" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>commentOfLawyer}" width="150px"/>
-			<TextArea value="{LawyerComment}" enabled="{= ${UserFunc} === 'L' ? true : false }" width="350px"/>
+			<TextArea value="{LawyerComment}" id="riskLawyerComment" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>eliminated}" width="150px"/>
-			<CheckBox selected="{Eliminated}" enabled="{= ${UserFunc} === 'L' ? true : false }" />
+			<CheckBox selected="{Eliminated}" id="riskEliminated"  />
 			<ToolbarSpacer/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="risks" type="Back" press="dialogCancel"/>
-			<Button text="{i18n>add}" custom:id="risks" custom:url="RisksByCounterparty" visible="false" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>add}" custom:id="risks" custom:url="ToRisksCounterparty" visible="false" type="Accept" press="dialogAdd"/>
 			<Button text="{i18n>edit}" custom:id="risks" visible="false" type="Default" press="dialogEdit"/>
-			<Button text="{i18n>save}" custom:id="risks" custom:url="RisksByCounterparty" visible="false" type="Accept" press="dialogSave"/>
+			<Button text="{i18n>save}" custom:id="risks" custom:url="ToRisksCounterparty" visible="false" type="Accept" press="dialogSave"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

@@ -124,7 +124,12 @@ sap.ui.define([
 						TCNumber : this.TCNumber,
 						ItemType : this.ItemType
 					});
-					this.byId("page").bindElement(this.objectPath + "/ToUserFunction");
+					this.byId("page").bindElement({
+						path: this.objectPath + "/ToUserFunction",
+						events: {
+							dataReceived: this.dataReceived.bind(this)
+						}
+					});
 					
 					if(this.ItemType === "R"){
 						risks.setVisible(true);
@@ -143,6 +148,10 @@ sap.ui.define([
 						//this.bindTable("limitsTable", this.objectPath + "/ToCounterpartyRating/ToLimitsRating");
 					}
 				}.bind(this));
+			},
+			
+			dataReceived: function(data){
+				this.UserFunc = data.getParameter("data").UserFunc;
 			},
 			
 			// Load current limits after counterparty rating loaded(ratingElement)
@@ -273,7 +282,6 @@ sap.ui.define([
 				var dialog = this[id + "Dialog"];
 				dialog.unbindElement();
 				this.setEnabledDialog(dialog, true);
-				dialog.bindElement(this.objectPath + "/ToUserFunction");
 				sap.ui.getCore().byId(id + "EditContent").setVisible(false);
 				var select = sap.ui.getCore().byId(id + "AddContent");
 				var filters = [new Filter("TCNumber", FilterOperator.EQ, this.TCNumber)];
@@ -286,6 +294,15 @@ sap.ui.define([
 				buttons[1].setVisible(true);
 				buttons[2].setVisible(false);
 				buttons[3].setVisible(false);
+				
+				if(this.UserFunc === "L"){
+					this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], true);
+					this.setInputEnabled(["riskAgreement"], false);
+				}else if(this.UserFunc === "T"){
+					this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], false);
+					this.setInputEnabled(["riskAgreement"], true);
+				}
+				
 				dialog.open();
 			},
 			tableEdit: function(oEvent) {
@@ -300,6 +317,15 @@ sap.ui.define([
 				buttons[1].setVisible(false);
 				buttons[2].setVisible(false);
 				buttons[3].setVisible(true).setEnabled(true);
+				
+				if(this.UserFunc === "L"){
+					this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], true);
+					this.setInputEnabled(["riskAgreement"], false);
+				}else if(this.UserFunc === "T"){
+					this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], false);
+					this.setInputEnabled(["riskAgreement"], true);
+				}
+				
 				dialog.open();
 			},
 			tableDelete: function(oEvent) {
@@ -339,7 +365,7 @@ sap.ui.define([
 				var button = oEvent.getSource();
 				var dialog = button.getParent();
 				var id =  button.data("id");
-				var url = button.data("url") ? "/" + button.data("url") + "Set" : "/" + id + "Set";
+				var url = button.data("url") ? "/" + button.data("url") : "/" + id + "Set";
 				var oModel = dialog.getModel();
 				var oData = this.getOdata(dialog);
 				oData.TCNumber = this.TCNumber;
@@ -376,7 +402,15 @@ sap.ui.define([
 				}else{
 					this.setEnabledDialog(dialog, false);
 					dialog.getButtons()[3].setEnabled(true);
+					if(this.UserFunc === "L"){
+						this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], true);
+						this.setInputEnabled(["riskAgreement"], false);
+					}else if(this.UserFunc === "T"){
+						this.setInputEnabled(["riskDescription", "riskActions", "riskLawyerComment", "riskEliminated"], false);
+						this.setInputEnabled(["riskAgreement"], true);
+					}
 				}
+				
 			},
 			
 			// Set odata from any dialog, argument oDialog = object dialog / return object inputs Data
@@ -427,11 +461,8 @@ sap.ui.define([
 			// Enable/Disables inputs depending flag arg
 			setInputEnabled: function(idArr, flag){
 				for(var i in idArr){
-					if(this.byId(idArr[i])){
-						this.byId(idArr[i]).setEnabled(flag);
-					}else if(sap.ui.getCore().byId(idArr[i])){
-						sap.ui.getCore().byId(idArr[i]).setEnabled(flag);
-					}
+					var input = this.byId(idArr[i]) || sap.ui.getCore().byId(idArr[i]);
+					input.setEnabled(flag);
 				}
 			},
 			

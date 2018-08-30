@@ -186,7 +186,7 @@ sap.ui.define([
 			
 			gotoBP: function(oEvent){
 				var counterParty = oEvent.getSource().data("key");
-				window.open("https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&/CounterpartyHeaderSet/" + counterParty);
+				window.open("/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&/CounterpartyHeaderSet/" + counterParty);
 			},
 
 			_onBindingChange : function () {
@@ -256,7 +256,7 @@ sap.ui.define([
 			},
 			
 			openDeal: function(){
-				window.open("https://ws-ere.corp.suek.ru/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
+				window.open("/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 			},
 			
 			onApproveSuccess: function(link, oData) {

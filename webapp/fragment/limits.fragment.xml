@@ -66,7 +66,7 @@
 				<Label class="red" text="{WarningPayment}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="150px"/>
-				<Label text="{TermsSales}"/>
+				<Label text="{TermsSales} {= ${PaymTermDescr} ? ' - ' + ${PaymTermDescr} : ''}"/>
 				<ToolbarSpacer/>
 				<Label text=""/>
 				<ToolbarSpacer/>

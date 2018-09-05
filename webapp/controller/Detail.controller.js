@@ -248,7 +248,7 @@ sap.ui.define([
 					TCNumber: this.TCNumber
 				};
 				if(this.ItemType === "L"){
-					oFuncParams.IsApproved = true;
+					oFuncParams.IsApproved = this.byId("withMembers").getSelected();
 				}
 				this.getModel().callFunction("/" + link, {
 					method: "POST",

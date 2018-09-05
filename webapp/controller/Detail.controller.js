@@ -247,7 +247,9 @@ sap.ui.define([
 				var oFuncParams = { 
 					TCNumber: this.TCNumber
 				};
-				
+				if(this.ItemType === "L"){
+					oFuncParams.IsApproved = true;
+				}
 				this.getModel().callFunction("/" + link, {
 					method: "POST",
 					urlParameters: oFuncParams,

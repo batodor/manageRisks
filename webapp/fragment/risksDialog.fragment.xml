@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog class="sapUiContentPadding" id="risksDialog">
 		<content>
-			<Label required="true" text="{i18n>counterparty}" width="150px"/>
+			<Label text="{i18n>counterparty}" width="150px"/>
 			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="350px"/>
 			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" items="{}"
 				forceSelection="false" id="risksAddContent" width="350px">

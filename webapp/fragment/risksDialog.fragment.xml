@@ -2,7 +2,7 @@
 	<Dialog class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Label text="{i18n>counterparty}" width="150px"/>
-			<Link press="gotoBP" custom:key="counterparty" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="350px"/>
+			<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}" id="risksEditContent" width="350px"/>
 			<Select selectedKey="{Counterparty}" custom:key="counterparty" custom:checkOmit="true" items="{}"
 				forceSelection="false" id="risksAddContent" width="350px">
 				<core:Item key="{Code}" text="{Code} - {Name}"/>

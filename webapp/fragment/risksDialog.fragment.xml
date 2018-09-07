@@ -26,10 +26,10 @@
 			<Label text="{i18n>recommendedActions}" width="150px"/>
 			<TextArea value="{Actions}" id="riskActions" width="350px" height="120px" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>agreement}" width="150px"/>
+			<Label text="{i18n>agreement}" class="wrap" width="150px"/>
 			<TextArea value="{Agreement}" id="riskAgreement" width="350px" custom:key="agreement" custom:checkOmit="true" custom:disabled="true" height="120px" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>commentOfLawyer}" width="150px"/>
+			<Label text="{i18n>commentOfLawyer}" class="wrap" width="150px"/>
 			<TextArea value="{LawyerComment}" id="riskLawyerComment" width="350px"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>eliminated}" width="150px"/>

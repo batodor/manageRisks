@@ -18,7 +18,11 @@ div[id*="ratingElement"] .sapMCbBg{
 .sapMPageFooter .sapContrast div:first-child{
 	display: none;
 }
-
+.wrap{
+	white-space: normal;
+	line-height: normal;
+	vertical-align: middle;
+}
 table[id*="risksCountryTable"] .sapMCbMarkChecked {
     border-color: red !important;
 }

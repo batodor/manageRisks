@@ -151,7 +151,17 @@ sap.ui.define([
 			},
 			
 			dataReceived: function(data){
-				this.UserFunc = data.getParameter("data").UserFunc;
+				var data = data.getParameter("data");
+				this.UserFunc = data.UserFunc;
+				this.DocumentType = data.DocumentType;
+				var openDeal = this.byId("openDeal");
+				if(this.DocumentType === "O"){
+					openDeal.data("url", "/sap/bc/ui2/flp#ZTS_OFFER_APPROVE-display&/TCNumber/" + this.TCNumber + "//Display");
+					openDeal.setText(this.getResourceBundle().getText("openOffer"));
+				}else if(this.DocumentType === "D"){
+					openDeal.data("url", "/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
+					openDeal.setText(this.getResourceBundle().getText("openDeal"));
+				}
 			},
 			
 			// Load current limits after counterparty rating loaded(ratingElement)
@@ -257,8 +267,9 @@ sap.ui.define([
 				});
 			},
 			
-			openDeal: function(){
-				window.open("/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
+			openDeal: function(oEvent){
+				var url = oEvent.getSource().data("url");
+				window.open(url);
 			},
 			
 			onApproveSuccess: function(link, oData) {

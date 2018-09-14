@@ -226,8 +226,8 @@ sap.ui.define([
 			 */
 			_onMasterMatched :  function(oEvent) {
 				var type = oEvent.getParameter("arguments").ItemType;
-				var that = this; 
 				if(type){
+					var that = this; 
 					this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
 					this._oList.attachEventOnce("updateFinished", function(){
 						that._applyFilterSearch();
@@ -238,14 +238,20 @@ sap.ui.define([
 			
 			_onObjectMatched : function (oEvent) {
 				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
-				this._oList.attachEventOnce("updateFinished", function(){
-					var items = this.getItems();
-					for(var i in items){
-						if(items[i].getProperty("info") === TCNumber){
-							items[i].setSelected(true);
+				var type = oEvent.getParameter("arguments").ItemType;
+				if(type){
+					var that = this; 
+					this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
+					this._oList.attachEventOnce("updateFinished", function(){
+						var items = this.getItems();
+						for(var i in items){
+							if(items[i].getProperty("info") === TCNumber){
+								items[i].setSelected(true);
+							}
 						}
-					}
-				});
+						that._applyFilterSearch();
+					});
+				}
 			},
 
 			/**

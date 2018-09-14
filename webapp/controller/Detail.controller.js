@@ -259,6 +259,7 @@ sap.ui.define([
 				};
 				if(this.ItemType === "L"){
 					oFuncParams.IsApproved = this.byId("withMembers").getSelected();
+					oFuncParams.ApprovalDate = this.byId("approvalDate").getDateValue();
 				}
 				this.getModel().callFunction("/" + link, {
 					method: "POST",
@@ -284,6 +285,7 @@ sap.ui.define([
 					var mailBody = "&body=" + oResult.Message + "%0D%0A%0D%0ADeal: " + oResult.DealURL;
 					var fullMail = mailAddress + mailSubject + mailBody;
 					window.open(fullMail);
+					this.getModel().refresh(true);
 				} else {
 					MessageBox.error(oResult.Message);
 				}
@@ -550,6 +552,15 @@ sap.ui.define([
 						}
 					}
 				}
+			},
+			
+			// On checkbox set enabled/disabled
+			onCheckBox: function(oEvent){
+				var check = oEvent.getSource();
+				var selected = oEvent.getParameters("selected").selected;
+				var id = check.data("id");
+				var obj = this.byId(id) || sap.ui.getCore().byId(id);
+				obj.setEnabled(selected);
 			}
 
 		});

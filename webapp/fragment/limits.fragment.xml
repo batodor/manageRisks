@@ -70,7 +70,11 @@
 				<ToolbarSpacer/>
 				<Label text=""/>
 				<ToolbarSpacer/>
-				<CheckBox id="withMembers" text="{i18n>withMembers} {SupervisOrgan}" />
+				<CheckBox id="withMembers" select="onCheckBox" custom:id="approvalDate" text="{i18n>withMembers} {SupervisOrgan}" />
+				<HBox alignItems="Center">
+					<Label class="black" text="{i18n>approvalDate}:" width="150px" />
+					<DatePicker enabled="false" width="auto" id="approvalDate" dateValue="{ApprovalDate}" />
+				</HBox>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>

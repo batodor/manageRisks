@@ -259,7 +259,7 @@ sap.ui.define([
 				};
 				if(this.ItemType === "L"){
 					oFuncParams.IsApproved = this.byId("withMembers").getSelected();
-					oFuncParams.ApprovalDate = this.byId("approvalDate").getDateValue() ? this.byId("approvalDate").getDateValue() : "0";
+					oFuncParams.ApprovalDate = this.byId("approvalDate").getDateValue() ? this.byId("approvalDate").getDateValue() : new Date();
 				}
 				this.getModel().callFunction("/" + link, {
 					method: "POST",

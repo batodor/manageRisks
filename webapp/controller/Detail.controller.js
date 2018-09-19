@@ -253,18 +253,28 @@ sap.ui.define([
 			},
 			
 			approve: function(){
-				var link = this.ItemType === "R" ? 'ApproveRisks' : 'ApproveLimits';
-				var oFuncParams = { 
-					TCNumber: this.TCNumber
-				};
-				if(this.ItemType === "L"){
-					oFuncParams.IsApproved = this.byId("withMembers").getSelected();
-					oFuncParams.ApprovalDate = this.byId("approvalDate").getDateValue() ? this.byId("approvalDate").getDateValue() : new Date();
-				}
-				this.getModel().callFunction("/" + link, {
-					method: "POST",
-					urlParameters: oFuncParams,
-					success: this.onApproveSuccess.bind(this, link)
+				var that = this;
+				MessageBox.confirm(that.getResourceBundle().getText("askContinue"), {
+					actions: [that.getResourceBundle().getText("approve"), sap.m.MessageBox.Action.CLOSE],
+					onClose: function(sAction) {
+						if (sAction === that.getResourceBundle().getText("approve")) {
+							var link = that.ItemType === "R" ? 'ApproveRisks' : 'ApproveLimits';
+							var oFuncParams = { 
+								TCNumber: that.TCNumber
+							};
+							if(that.ItemType === "L"){
+								oFuncParams.IsApproved = that.byId("withMembers").getSelected();
+								oFuncParams.ApprovalDate = that.byId("approvalDate").getDateValue() ? that.byId("approvalDate").getDateValue() : new Date();
+							}
+							that.getModel().callFunction("/" + link, {
+								method: "POST",
+								urlParameters: oFuncParams,
+								success: that.onApproveSuccess.bind(that, link)
+							});
+						} else {
+							MessageToast.show("Approve canceled!");
+						}
+					}
 				});
 			},
 			
@@ -276,19 +286,32 @@ sap.ui.define([
 			onApproveSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
-					MessageToast.show(oResult.Message);
 					var eventBus = sap.ui.getCore().getEventBus();
 					eventBus.publish("DetailMasterChannel", "onApproveEvent");
 					
 					var mailAddress = "mailto:" + oResult.Recipient;
 					var mailSubject = "?subject=" + oResult.Message;
-					var mailBody = "&body=" + oResult.Message + "%0D%0A%0D%0ADeal: " + oResult.DealURL;
+					var mailBody = "&body=" + oResult.BodyMail;
 					var fullMail = mailAddress + mailSubject + mailBody;
 					window.open(fullMail);
-					this.getModel().refresh(true);
+					MessageBox.alert(oResult.Message, {
+						actions: [sap.m.MessageBox.Action.CLOSE]
+					});
+					// this.onCloseDetailPress();
 				} else {
 					MessageBox.error(oResult.Message);
 				}
+			},
+			
+			onCloseDetailPress: function () {
+				this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
+				// No item should be selected on master after detail page is closed
+				this.getOwnerComponent().oListSelector.clearMasterListSelection();
+				var settings = {};
+				if(this.ItemType){
+					settings.ItemType = this.ItemType;      
+				}
+				this.getRouter().navTo("master", settings);
 			},
 			
 			// Table buttons function for create/edit/copy/delete of items

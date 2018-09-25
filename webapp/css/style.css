@@ -12,6 +12,9 @@ div[id*="ratingElement"] .sapMCbBg{
 	left:0;
 	top:0;
 }
+.padding{
+	padding: 1rem;
+}
 .sapUiSizeCompact .sapMTB{
 	height: 3rem;
 }

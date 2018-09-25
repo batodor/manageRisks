@@ -33,8 +33,8 @@
 							<cells>
 								<Text text="{CounterpartyName}"/>
 								<Text text="{RiskType} - {RiskTypeDescr}"/>
-								<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-								<Text text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+								<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
+								<Text text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
 								<CheckBox selected="{Eliminated}" editable="false"/>
 							</cells>
 						</ColumnListItem>	

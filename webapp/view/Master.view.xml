@@ -59,13 +59,20 @@
 					</Toolbar>
 				</infoToolbar>
 				<items>
-					<StandardListItem
+					<CustomListItem
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
-						press="onSelectionChange"
-						title="{TraderName}"
-						description="{ path: 'CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"
-						info="{TCNumber}">
-					</StandardListItem>
+						press="onSelectionChange">
+						<VBox class="padding">
+							<VBox>
+								<Title titleStyle="H4" text="{TraderName}" />
+								<Title titleStyle="H5" text="{CounterpartyName}" />
+							</VBox>
+							<HBox justifyContent="SpaceBetween">
+								<Label text="{ path: 'CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }" />
+								<Label text="{TCNumber}" />
+							</HBox>
+						</VBox>
+					</CustomListItem>
 				</items>
 			</List>
 		</semantic:content>

@@ -28,6 +28,7 @@
 			<ToolbarSpacer />
 			<!--<Button press="save" text="{i18n>save}" />-->
 			<Button press="approve" type="Accept" text="{i18n>approve}" />
+			<Button press="discard" id="discardButton" visible="false" type="Reject" text="{i18n>discard}" />
 		</semantic:customFooterContent>
 		
 	</semantic:DetailPage>

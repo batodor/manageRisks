@@ -162,6 +162,11 @@ sap.ui.define([
 					openDeal.data("url", "/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 					openDeal.setText(this.getResourceBundle().getText("openDeal"));
 				}
+				if(this.ItemType === "L" && this.UserFunc === "L"){
+					this.byId("discardButton").setVisible(true);
+				}else{
+					this.byId("discardButton").setVisible(false);
+				}
 			},
 			
 			// Load current limits after counterparty rating loaded(ratingElement)
@@ -584,6 +589,28 @@ sap.ui.define([
 				var id = check.data("id");
 				var obj = this.byId(id) || sap.ui.getCore().byId(id);
 				obj.setEnabled(selected);
+			},
+			
+			discard: function(){
+				var oFuncParams = {
+					TCNumber: this.TCNumber
+				};
+				this.getModel().callFunction("/DiscardRisks", {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onDiscardSuccess.bind(this, "DiscardRisks")
+				});
+			},
+			
+			onDiscardSuccess: function(link, oData) {
+				var oResult = oData[link];
+				if (oResult.ActionSuccessful) {
+					MessageBox.alert(oResult.Message, {
+						actions: [sap.m.MessageBox.Action.CLOSE]
+					});
+				} else {
+					MessageBox.error(oResult.Message);
+				}
 			}
 
 		});

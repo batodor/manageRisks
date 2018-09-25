@@ -150,8 +150,8 @@ sap.ui.define([
 				}.bind(this));
 			},
 			
-			dataReceived: function(data){
-				var data = data.getParameter("data");
+			dataReceived: function(oData){
+				var data = oData.getParameter("data");
 				this.UserFunc = data.UserFunc;
 				this.DocumentType = data.DocumentType;
 				var openDeal = this.byId("openDeal");
@@ -162,7 +162,7 @@ sap.ui.define([
 					openDeal.data("url", "/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 					openDeal.setText(this.getResourceBundle().getText("openDeal"));
 				}
-				if(this.ItemType === "L" && this.UserFunc === "L"){
+				if(this.ItemType === "R" && this.UserFunc === "L"){
 					this.byId("discardButton").setVisible(true);
 				}else{
 					this.byId("discardButton").setVisible(false);

@@ -119,16 +119,14 @@ sap.ui.define([
 					this.onRefresh();
 					return;
 				}
-
 				var sQuery = oEvent.getParameter("query");
-
+				var filters = [];
 				if (sQuery) {
-					this._oListFilterState.aSearch = [new Filter({path: "TraderName", operator: FilterOperator.Contains, value1: sQuery })];
-				} else {
-					this._oListFilterState.aSearch = [];
+					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.Contains, sQuery);
+					filters.push(filter);
 				}
+				this._oListFilterState.aSearch = filters;
 				this._applyFilterSearch();
-
 			},
 
 			/**

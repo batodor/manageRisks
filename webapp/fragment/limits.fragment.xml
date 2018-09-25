@@ -5,10 +5,10 @@
 				<Label class="black" text="{i18n>counterparty}:" width="200px"/>
 				<Link press="gotoBP" custom:key="{Counterparty}" text="{Counterparty} - {CounterpartyName}"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rating}:" width="200px"/>
+				<Label class="black" text="{i18n>finalRank}:" width="200px"/>
 				<Label text="{Rating}"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>updateDate}:" width="200px"/>
+				<Label class="black" text="{i18n>updateDateRanking}:" width="200px"/>
 				<Label text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>expressScore}:" width="200px"/>
@@ -52,17 +52,14 @@
 				</OverflowToolbar>
 				<Label class="black" text="{i18n>durationOnDays}:" width="150px"/>
 				<Label text="{DurationDays}" width="150px" />
-				<!--<Label class="black" text="{= ${WarningPeriod} ? ${i18n>warningPeriod} + ':' : ''}" width="150px"/>-->
 				<Label class="red" text="{WarningPeriod}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>tonnage}:" width="150px"/>
 				<Label text="{Tonnage} {TonnageUoM}" width="150px"/>
-				<!--<Label class="black" text="{= ${WarningTonnage} ? ${i18n>warningTonnage} + ':' : ''}" width="150px"/>-->
 				<Label class="red" text="{WarningTonnage}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="150px"/>
 				<Label text="{PaymMethod} {= ${PaymMethodDescr} ? ' - ' + ${PaymMethodDescr} : ''}" width="150px"/>
-				<!--<Label class="black" text="{= ${WarningPayment} ? ${i18n>warningPayment} + ':' : ''}"  width="150px"/>-->
 				<Label class="red" text="{WarningPayment}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentTerms}:" width="150px"/>

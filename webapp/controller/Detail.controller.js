@@ -606,9 +606,9 @@ sap.ui.define([
 			onDiscardSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
-					var eventBus = sap.ui.getCore().getEventBus();
-					eventBus.publish("DetailMasterChannel", "onApproveEvent");
-					//this.onCloseDetailPress();
+					//var eventBus = sap.ui.getCore().getEventBus();
+					//eventBus.publish("DetailMasterChannel", "onApproveEvent");
+					this.onCloseDetailPress();
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
 					});

@@ -49,13 +49,13 @@ sap.ui.define([
 					oViewModel.setProperty("/delay", iOriginalBusyDelay);
 				});
 
-				// this.getView().addEventDelegate({
-				// 	onBeforeFirstShow: function () {
-				// 		this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
-				// 	}.bind(this)
-				// });
+				this.getView().addEventDelegate({
+					onBeforeFirstShow: function () {
+						this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
+					}.bind(this)
+				});
 				
-				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 				
@@ -224,27 +224,6 @@ sap.ui.define([
 			 */
 			_onMasterMatched :  function(oEvent) {
 				this.ItemType = oEvent.getParameter("arguments").ItemType;
-				this.bindList();
-			},
-			
-			_onObjectMatched : function (oEvent) {
-				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
-				if(this.ItemType){
-					var that = this; 
-					this._oList.attachEventOnce("updateFinished", function(){
-						var items = this.getItems();
-						for(var i in items){
-							if(items[i].data("tcnumber") === this.TCNumber){
-								items[i].setSelected(true);
-							}
-						}
-						that._applyFilterSearch();
-					});
-				}
-				this.bindList();
-			},
-			
-			bindList: function(){
 				var settings = {
 					path: "/DealSet",
 					template: this._oList['mBindingInfos'].items.template.clone(),

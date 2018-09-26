@@ -99,18 +99,12 @@
 			},
 			"routes": [
 				{
-					"pattern": [
-						":ItemType:",
-						"Type/:ItemType:"
-					],
+					"pattern": ":ItemType:",
 					"name": "master",
-					"target": [
-						"master",
-						"object"
-					]
+					"target": "master"
 				},
 				{
-					"pattern": "Deal/{TCNumber}/Type/{ItemType}",
+					"pattern": "Deal/{TCNumber}/:ItemType:",
 					"name": "object",
 					"target": [
 						"master",

@@ -100,13 +100,13 @@
 			"routes": [
 				{
 					"pattern": [
-						"",
-						"Type/{ItemType}"
+						":ItemType:",
+						"Type/:ItemType:"
 					],
 					"name": "master",
 					"target": [
-						"object",
-						"master"
+						"master",
+						"object"
 					]
 				},
 				{

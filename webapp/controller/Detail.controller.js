@@ -162,7 +162,7 @@ sap.ui.define([
 					openDeal.data("url", "/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID=" + this.TCNumber);
 					openDeal.setText(this.getResourceBundle().getText("openDeal"));
 				}
-				if(this.ItemType === "R" && this.UserFunc === "L"){
+				if(this.UserFunc === "L"){
 					this.byId("discardButton").setVisible(true);
 				}else{
 					this.byId("discardButton").setVisible(false);
@@ -593,12 +593,13 @@ sap.ui.define([
 			
 			discard: function(){
 				var oFuncParams = {
-					TCNumber: this.TCNumber
+					TCNumber: this.TCNumber,
+					ItemType: this.ItemType
 				};
-				this.getModel().callFunction("/DiscardRisks", {
+				this.getModel().callFunction("/Discard", {
 					method: "POST",
 					urlParameters: oFuncParams,
-					success: this.onDiscardSuccess.bind(this, "DiscardRisks")
+					success: this.onDiscardSuccess.bind(this, "Discard")
 				});
 			},
 			
@@ -607,7 +608,12 @@ sap.ui.define([
 				if (oResult.ActionSuccessful) {
 					var eventBus = sap.ui.getCore().getEventBus();
 					eventBus.publish("DetailMasterChannel", "onApproveEvent");
-					this.getModel().refresh();
+					this.getOwnerComponent().oListSelector.clearMasterListSelection();
+					var settings = {};
+					if(this.ItemType){
+						settings.ItemType = this.ItemType;
+					}
+					this.getRouter().navTo("master", settings);
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
 					});

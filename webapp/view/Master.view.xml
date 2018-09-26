@@ -3,6 +3,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 	xmlns:semantic="sap.m.semantic">
 
 	<semantic:MasterPage
@@ -60,12 +61,13 @@
 				</infoToolbar>
 				<items>
 					<CustomListItem
+						custom:tcnumber="{TCNumber}"
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
 						press="onSelectionChange">
 						<VBox class="padding">
 							<VBox>
-								<Title titleStyle="H4" text="{TraderName}" />
-								<Title titleStyle="H5" text="{CounterpartyName}" />
+								<Title titleStyle="H5" text="{TraderName}" />
+								<Text text="{CounterpartyName}" />
 							</VBox>
 							<HBox justifyContent="SpaceBetween">
 								<Label text="{ path: 'CreatedOn', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }" />

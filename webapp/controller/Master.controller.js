@@ -243,7 +243,7 @@ sap.ui.define([
 					this._oList.attachEventOnce("updateFinished", function(){
 						var items = this.getItems();
 						for(var i in items){
-							if(items[i].getProperty("info") === TCNumber){
+							if(items[i].data("tcnumber") === TCNumber){
 								items[i].setSelected(true);
 							}
 						}

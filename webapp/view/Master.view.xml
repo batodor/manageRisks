@@ -55,8 +55,7 @@
 				<items>
 					<CustomListItem
 						custom:tcnumber="{TCNumber}"
-						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
-						press="onSelectionChange">
+						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}">
 						<VBox class="padding">
 							<VBox>
 								<Title titleStyle="H5" text="{TraderName}" />

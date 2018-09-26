@@ -49,11 +49,11 @@ sap.ui.define([
 					oViewModel.setProperty("/delay", iOriginalBusyDelay);
 				});
 
-				this.getView().addEventDelegate({
-					onBeforeFirstShow: function () {
-						this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
-					}.bind(this)
-				});
+				// this.getView().addEventDelegate({
+				// 	onBeforeFirstShow: function () {
+				// 		this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
+				// 	}.bind(this)
+				// });
 				
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
@@ -224,19 +224,7 @@ sap.ui.define([
 			 */
 			_onMasterMatched :  function(oEvent) {
 				this.ItemType = oEvent.getParameter("arguments").ItemType;
-				var settings = {
-					path: "/DealSet",
-					template: this._oList['mBindingInfos'].items.template.clone(),
-					sorter: { path: "CreatedOn", descending: true }
-				};
-				if(this.ItemType){
-					settings.parameters = {
-						custom: { ItemType: this.ItemType }
-					};
-				}
-				if(this._oList.getItems().length === 0){
-					this._oList.bindItems(settings);
-				}
+				this.bindList();
 			},
 			
 			_onObjectMatched : function (oEvent) {
@@ -253,11 +241,14 @@ sap.ui.define([
 						that._applyFilterSearch();
 					});
 				}
-				
+				this.bindList();
+			},
+			
+			bindList: function(){
 				var settings = {
 					path: "/DealSet",
 					template: this._oList['mBindingInfos'].items.template.clone(),
-					sorter: { path: "CreatedOn", descending: true }
+					sorter: { path: "CreatedOn" }
 				};
 				if(this.ItemType){
 					settings.parameters = {

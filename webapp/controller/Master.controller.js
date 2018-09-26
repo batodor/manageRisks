@@ -275,8 +275,7 @@ sap.ui.define([
 			_applyFilterSearch : function () {
 				var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
 					oViewModel = this.getModel("masterView");
-				var newFilter = new Filter({ filters: aFilters, and: true });
-				this._oList.getBinding("items").filter(newFilter, "Application");
+				this._oList.getBinding("items").filter(aFilters, "Application");
 				// changes the noDataText of the list in case there are no filter results
 				if (aFilters.length !== 0) {
 					oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataWithFilterOrSearchText"));

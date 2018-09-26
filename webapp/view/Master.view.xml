@@ -33,14 +33,7 @@
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
 			<List
 				id="list"
-				items="{
-					path: '/DealSet',
-					sorter: {
-						path: 'TraderName',
-						descending: false
-					},
-					groupHeaderFactory: '.createGroupHeader'
-				}"
+				items="{}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"

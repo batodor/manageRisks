@@ -223,32 +223,49 @@ sap.ui.define([
 			 * @private
 			 */
 			_onMasterMatched :  function(oEvent) {
-				var type = oEvent.getParameter("arguments").ItemType;
-				if(type){
-					var that = this; 
-					this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
-					this._oList.attachEventOnce("updateFinished", function(){
-						that._applyFilterSearch();
-					});
+				this.ItemType = oEvent.getParameter("arguments").ItemType;
+				var settings = {
+					path: "/DealSet",
+					template: this._oList['mBindingInfos'].items.template.clone(),
+					sorter: { path: "CreatedOn", descending: true }
+				};
+				if(this.ItemType){
+					settings.parameters = {
+						custom: { ItemType: this.ItemType }
+					};
 				}
-				//this.getCount();
+				if(this._oList.getItems().length === 0){
+					this._oList.bindItems(settings);
+				}
 			},
 			
 			_onObjectMatched : function (oEvent) {
-				var TCNumber =  oEvent.getParameter("arguments").TCNumber;
-				var type = oEvent.getParameter("arguments").ItemType;
-				if(type){
+				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
+				if(this.ItemType){
 					var that = this; 
-					this._oListFilterState.aFilter.push(new Filter({path: "ItemType", operator: FilterOperator.EQ, value1: type }));
 					this._oList.attachEventOnce("updateFinished", function(){
 						var items = this.getItems();
 						for(var i in items){
-							if(items[i].data("tcnumber") === TCNumber){
+							if(items[i].data("tcnumber") === this.TCNumber){
 								items[i].setSelected(true);
 							}
 						}
 						that._applyFilterSearch();
 					});
+				}
+				
+				var settings = {
+					path: "/DealSet",
+					template: this._oList['mBindingInfos'].items.template.clone(),
+					sorter: { path: "CreatedOn", descending: true }
+				};
+				if(this.ItemType){
+					settings.parameters = {
+						custom: { ItemType: this.ItemType }
+					};
+				}
+				if(this._oList.getItems().length === 0){
+					this._oList.bindItems(settings);
 				}
 			},
 

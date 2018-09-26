@@ -608,12 +608,7 @@ sap.ui.define([
 				if (oResult.ActionSuccessful) {
 					var eventBus = sap.ui.getCore().getEventBus();
 					eventBus.publish("DetailMasterChannel", "onApproveEvent");
-					this.getOwnerComponent().oListSelector.clearMasterListSelection();
-					var settings = {};
-					if(this.ItemType){
-						settings.ItemType = this.ItemType;
-					}
-					this.getRouter().navTo("master", settings);
+					//this.onCloseDetailPress();
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
 					});

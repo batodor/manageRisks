@@ -99,9 +99,16 @@
 			},
 			"routes": [
 				{
-					"pattern": ":ItemType:",
+					"pattern": [
+						"",
+						":ItemType:",
+						"Type/:ItemType:"
+					],
 					"name": "master",
-					"target": "master"
+					"target": [
+						"master",
+						"object"
+					]
 				},
 				{
 					"pattern": "Deal/{TCNumber}/:ItemType:",

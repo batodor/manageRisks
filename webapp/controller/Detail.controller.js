@@ -260,9 +260,9 @@ sap.ui.define([
 			approve: function(){
 				var that = this;
 				MessageBox.confirm(that.getResourceBundle().getText("askContinue"), {
-					actions: [that.getResourceBundle().getText("approve"), sap.m.MessageBox.Action.CLOSE],
+					actions: [that.getResourceBundle().getText("send"), sap.m.MessageBox.Action.CLOSE],
 					onClose: function(sAction) {
-						if (sAction === that.getResourceBundle().getText("approve")) {
+						if (sAction === that.getResourceBundle().getText("send")) {
 							var link = that.ItemType === "R" ? 'ApproveRisks' : 'ApproveLimits';
 							var oFuncParams = { 
 								TCNumber: that.TCNumber
@@ -277,7 +277,7 @@ sap.ui.define([
 								success: that.onApproveSuccess.bind(that, link)
 							});
 						} else {
-							MessageToast.show("Approve canceled!");
+							MessageToast.show("Sending canceled!");
 						}
 					}
 				});

@@ -609,7 +609,8 @@ sap.ui.define([
 				if (oResult.ActionSuccessful) {
 					this.byId("main").setVisible(false);
 					this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle"));
-					this.onCloseDetailPress();
+					var eventBus = sap.ui.getCore().getEventBus();
+					eventBus.publish("DetailMasterChannel", "onApproveEvent");
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
 					});

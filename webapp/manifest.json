@@ -101,7 +101,7 @@
 				{
 					"pattern": [
 						"",
-						":ItemType:",
+						"/:ItemType:",
 						"Type/:ItemType:"
 					],
 					"name": "master",

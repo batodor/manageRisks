@@ -16,14 +16,17 @@
 		busyIndicatorDelay="{detailView>/delay}">
 
 		<semantic:content>
-			<ObjectHeader
-				id="objectHeader"
-				title="{Name}">
-			</ObjectHeader>
-			<core:Fragment fragmentName="fragment.risks" type="XML"></core:Fragment>
-			<core:Fragment fragmentName="fragment.limits" type="XML"></core:Fragment>
+			<VBox id="main">
+				<ObjectHeader
+					id="objectHeader"
+					title="{Name}">
+				</ObjectHeader>
+				<core:Fragment fragmentName="fragment.risks" type="XML"></core:Fragment>
+				<core:Fragment fragmentName="fragment.limits" type="XML"></core:Fragment>
+			</VBox>
 		</semantic:content>
 		<semantic:customFooterContent>
+			<Button press="close" text="{i18n>close}" type="Emphasized" />
 			<Button enabled="false" press="openDeal" id="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 			<ToolbarSpacer />
 			<!--<Button press="save" text="{i18n>save}" />-->

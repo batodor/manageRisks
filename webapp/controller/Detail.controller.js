@@ -124,12 +124,12 @@ sap.ui.define([
 						TCNumber : this.TCNumber,
 						ItemType : this.ItemType
 					});
-					this.byId("page").bindElement({
+					this.byId("main").bindElement({
 						path: this.objectPath + "/ToUserFunction",
 						events: {
 							dataReceived: this.dataReceived.bind(this)
 						}
-					});
+					}).setVisible(true);
 					
 					if(this.ItemType === "R"){
 						risks.setVisible(true);
@@ -276,6 +276,8 @@ sap.ui.define([
 								urlParameters: oFuncParams,
 								success: that.onApproveSuccess.bind(that, link)
 							});
+							this.byId("main").setVisible(false);
+							this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle"));
 						} else {
 							MessageToast.show("Sending canceled!");
 						}
@@ -606,8 +608,8 @@ sap.ui.define([
 			onDiscardSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
-					//var eventBus = sap.ui.getCore().getEventBus();
-					//eventBus.publish("DetailMasterChannel", "onApproveEvent");
+					this.byId("main").setVisible(false);
+					this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle"));
 					this.onCloseDetailPress();
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
@@ -616,7 +618,6 @@ sap.ui.define([
 					MessageBox.error(oResult.Message);
 				}
 			}
-
 		});
 
 	}

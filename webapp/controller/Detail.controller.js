@@ -276,8 +276,6 @@ sap.ui.define([
 								urlParameters: oFuncParams,
 								success: that.onApproveSuccess.bind(that, link)
 							});
-							this.byId("main").setVisible(false);
-							this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle"));
 						} else {
 							MessageToast.show("Sending canceled!");
 						}
@@ -304,7 +302,8 @@ sap.ui.define([
 					MessageBox.alert(oResult.Message, {
 						actions: [sap.m.MessageBox.Action.CLOSE]
 					});
-					// this.onCloseDetailPress();
+					this.byId("main").setVisible(false);
+					this.byId("page").setTitle(this.getResourceBundle().getText("detailTitle"));
 				} else {
 					MessageBox.error(oResult.Message);
 				}

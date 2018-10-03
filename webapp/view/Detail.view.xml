@@ -26,7 +26,6 @@
 			</VBox>
 		</semantic:content>
 		<semantic:customFooterContent>
-			<Button press="close" text="{i18n>close}" type="Emphasized" />
 			<Button enabled="false" press="openDeal" id="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 			<ToolbarSpacer />
 			<!--<Button press="save" text="{i18n>save}" />-->

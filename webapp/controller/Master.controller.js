@@ -54,9 +54,8 @@ sap.ui.define([
 						this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
 					}.bind(this)
 				});
-				
-				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
+				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 				
 				var eventBus = sap.ui.getCore().getEventBus();
@@ -98,7 +97,6 @@ sap.ui.define([
 				// update the master list object counter after new data is loaded
 				this._updateListItemCount(oEvent.getParameter("total"));
 				// hide pull to refresh if necessary
-				this.byId("pullToRefresh").hide();
 				//this.getCount();
 			},
 

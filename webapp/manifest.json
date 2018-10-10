@@ -101,13 +101,11 @@
 				{
 					"pattern": [
 						"",
-						"/:ItemType:",
 						"Type/:ItemType:"
 					],
 					"name": "master",
 					"target": [
-						"master",
-						"object"
+						"master"
 					]
 				},
 				{

@@ -26,10 +26,6 @@
 		</semantic:subHeader>
 
 		<semantic:content>
-			<PullToRefresh
-				id="pullToRefresh"
-				visible="{device>/support/touch}"
-				refresh="onRefresh" />
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
 			<List
 				id="list"
@@ -55,6 +51,7 @@
 				<items>
 					<CustomListItem
 						custom:tcnumber="{TCNumber}"
+						press="onSelectionChange"
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}">
 						<VBox class="padding">
 							<VBox>

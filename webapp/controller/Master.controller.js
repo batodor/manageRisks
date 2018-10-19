@@ -258,10 +258,15 @@ sap.ui.define([
 			 * @private
 			 */
 			_updateListItemCount : function (iTotalItems) {
-				var sTitle;
 				// only update the counter if the length is final
 				if (this._oList.getBinding("items").isLengthFinal()) {
-					sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
+					var titleCode = "risksLimitsCount";
+					if(this.ItemType === "R"){
+						titleCode = "risksCount";
+					}else if(this.ItemType === "L"){
+						titleCode = "limitsCount";
+					}
+					var sTitle = this.getResourceBundle().getText(titleCode, [iTotalItems]);
 					this.getModel("masterView").setProperty("/title", sTitle);
 				}
 			},

@@ -136,7 +136,7 @@ sap.ui.define([
 						this.bindTable("risksTable", this.objectPath + "/ToRisksCounterparty");
 						this.bindTable("risksCountryTable", this.objectPath + "/ToRisksCountry");
 						// Set enabled send button if risks, since can be disabled after limits
-						this.byId("sendButton").setEnabled(false);
+						this.byId("sendButton").setEnabled(true);
 					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
 						this.byId("ratingElement").bindElement({

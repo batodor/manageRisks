@@ -135,6 +135,8 @@ sap.ui.define([
 						risks.setVisible(true);
 						this.bindTable("risksTable", this.objectPath + "/ToRisksCounterparty");
 						this.bindTable("risksCountryTable", this.objectPath + "/ToRisksCountry");
+						// Set enabled send button if risks, since can be disabled after limits
+						this.byId("sendButton").setEnabled(false);
 					}else if(this.ItemType === "L"){
 						limits.setVisible(true);
 						this.byId("ratingElement").bindElement({
@@ -146,6 +148,9 @@ sap.ui.define([
 						//this.bindElement("ratingElement", this.objectPath + "/ToCounterpartyRating", true);
 						this.bindElement("propertiesOfDeal", this.objectPath + "/ToPropertiesOfDeal", true);
 						//this.bindTable("limitsTable", this.objectPath + "/ToCounterpartyRating/ToLimitsRating");
+						
+						// Set disabled send button if limits, since activated by checkbox approved by
+						this.byId("sendButton").setEnabled(false);
 					}
 				}.bind(this));
 			},
@@ -590,6 +595,9 @@ sap.ui.define([
 				var id = check.data("id");
 				var obj = this.byId(id) || sap.ui.getCore().byId(id);
 				obj.setEnabled(selected);
+				
+				// if limits then set enabled button send
+				this.byId("sendButton").setEnabled(selected)
 			},
 			
 			discard: function(){

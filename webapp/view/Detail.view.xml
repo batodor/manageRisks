@@ -29,7 +29,7 @@
 			<Button enabled="false" press="openDeal" id="openDeal" text="{i18n>openDeal}" type="Emphasized" />
 			<ToolbarSpacer />
 			<!--<Button press="save" text="{i18n>save}" />-->
-			<Button press="discard" id="discardButton" visible="false" type="Reject" text="{i18n>reject}" />
+			<Button press="discard" id="discardButton" visible="false" type="Reject" text="{i18n>discard}" />
 			<Button press="approve" id="sendButton" type="Accept" text="{i18n>send}" />
 		</semantic:customFooterContent>
 		

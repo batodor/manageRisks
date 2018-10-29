@@ -598,6 +598,9 @@ sap.ui.define([
 				
 				// if approved by checked then set date approval enabled
 				this.byId("approvalDate").setEnabled(selected);
+				if(!selected){
+					this.byId("approvalDate").setDateValue(null).fireChange();
+				}
 			},
 			
 			// On limits date approval change set send button enabled

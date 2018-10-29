@@ -596,8 +596,14 @@ sap.ui.define([
 				var obj = this.byId(id) || sap.ui.getCore().byId(id);
 				obj.setEnabled(selected);
 				
-				// if limits then set enabled button send
-				this.byId("sendButton").setEnabled(selected)
+				// if approved by checked then set date approval enabled
+				this.byId("approvalDate").setEnabled(selected);
+			},
+			
+			// On limits date approval change set send button enabled
+			onDateChange: function(oEvent){
+				var newDate = oEvent.getParameter("newValue");
+				newDate ? this.byId("sendButton").setEnabled(true) : this.byId("sendButton").setEnabled(false);
 			},
 			
 			discard: function(){

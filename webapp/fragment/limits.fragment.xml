@@ -36,7 +36,7 @@
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Text text="{Tonnage}"/>
+								<Text text="{path: 'Tonnage', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 0}}"/>
 								<Text text="{Period} {PeriodUoM}"/>
 								<Text text="{PaymentCondition}"/>
 							</cells>
@@ -55,7 +55,7 @@
 				<Label class="red" text="{WarningPeriod}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>tonnage}:" width="150px"/>
-				<Label text="{Tonnage} {TonnageUoM}" width="150px"/>
+				<Label text="{path: 'Tonnage', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 0}} {TonnageUoM}" width="150px"/>
 				<Label class="red" text="{WarningTonnage}" />
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>paymentMethod}:" width="150px"/>
